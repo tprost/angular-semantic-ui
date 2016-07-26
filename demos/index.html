@@ -11,19 +11,24 @@
 
     <link rel="stylesheet" type="text/css" href="../semantic/dist/semantic.css">
     <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.js"></script>
+
+
+    <script src="../src/dimmer.js"></script>
     <script src="../src/modal.js"></script>
     <script src="../src/inline-modal.js"></script>
+    <script src="../src/ui.js"></script>
     <script src="./demo.js"></script>
     <style>
      body {
          padding: 5rem;
      }
-     body.dimmed.dimmable > .ui.active.dimmer {
-         display: flex;
+     body.dimmed.dimmable > .ui.active.dimmer.transition.visible {
+         display: flex !important;
          justify-content: center;
          align-items: center;
      }
-     .ui.modal {
+     .ui.modal.transition {
          position: relative;
          top: 0;
          left: 0;
@@ -33,11 +38,19 @@
   </head>
   <body ng-app="demo">
 
-    <div class="ui container">
+    <div class="ui container text">
 
       <button type="button" class="ui button demo-on-the-fly-modal-button">Click me to open an "on-the-fly" modal</button>
       <button type="button" class="ui button demo-inline-modal-button">Click me to open the modal that is already in this page</button>
     </div>
+
+    <div class="ui container text dimmable">
+      <p>A paragraph of text.</p>
+
+      <div id="demo-dimmer" class="ui dimmer demo-dimmer"></div>
+    </div>
+
+    <button type="button" class="ui button demo-dimmer-button">Click me to dim a div</button>
 
     <!--  -->
     <div id="demo-inline-modal" class="ui modal">

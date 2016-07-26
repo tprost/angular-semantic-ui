@@ -5,7 +5,7 @@ var angular, popeye,
 popeye = function(angular) {
   "use strict";
   var mod;
-  mod = angular.module("pathgather.popeye", []);
+  mod = angular.module("ui.modal", ["ui.dimmer"]);
   return mod.provider("Popeye", function() {
     var PopeyeProvider;
     return PopeyeProvider = {
@@ -241,5 +241,5 @@ if ((typeof window !== "undefined" && window !== null ? window.angular : void 0)
 }
 
 if (typeof module !== "undefined" && module !== null) {
-  module.exports = "pathgather.popeye";
+  module.exports = "ui.modal";
 }
