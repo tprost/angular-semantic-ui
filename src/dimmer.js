@@ -17,8 +17,8 @@ angular.module('ui.dimmer').controller('DimmerController', function($animate, $e
   var transition = 'fade';
   var ctrl = this;
 
-  this.$setDimmable = function(dimmableController) {
-    $dimmable = dimmableController.$element;
+  this.$setDimmable = function(dimmable) {
+    $dimmable = angular.element(dimmable);
   };
 
   this.is = {
@@ -99,7 +99,7 @@ angular.module('ui.dimmer').directive('dimmer', function() {
     require: '?^dimmable',
     controller: 'DimmerController',
     link: function(scope, elem, attrs, ctrl) {
-      if (ctrl[1]) ctrl[0].$setDimmable(ctrl[1]);
+      if (angular.isArray(ctrl) && ctrl[1]) ctrl[0].$setDimmable(ctrl[1].$element);
     }
   };
 });

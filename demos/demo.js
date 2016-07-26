@@ -1,13 +1,13 @@
 angular.module('demo', ['ui']);
 
-angular.module('demo').directive('demoOnTheFlyModalButton', function(Popeye) {
+angular.module('demo').directive('demoOnTheFlyModalButton', function(modal) {
 
   return {
     restrict: 'ACE',
     link: function(scope, elem, attrs) {
       elem.bind('click', function(e) {
         e.preventDefault();
-        var modal = Popeye.openModal({
+        modal.openModal({
 
           template: '<div class="header">Header</div>' +
             '<div class="content">' +
@@ -22,7 +22,7 @@ angular.module('demo').directive('demoOnTheFlyModalButton', function(Popeye) {
 
 });
 
-angular.module('demo').directive('demoInlineModalButton', function(Popeye) {
+angular.module('demo').directive('demoInlineModalButton', function(modal) {
 
   return {
     restrict: 'ACE',
@@ -39,7 +39,7 @@ angular.module('demo').directive('demoInlineModalButton', function(Popeye) {
 
 });
 
-angular.module('demo').directive('demoDimmerButton', function(Popeye) {
+angular.module('demo').directive('demoDimmerButton', function(modal) {
 
   return {
     restrict: 'ACE',

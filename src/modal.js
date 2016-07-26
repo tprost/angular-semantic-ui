@@ -6,9 +6,9 @@ popeye = function(angular) {
   "use strict";
   var mod;
   mod = angular.module("ui.modal", ["ui.dimmer"]);
-  return mod.provider("Popeye", function() {
-    var PopeyeProvider;
-    return PopeyeProvider = {
+  return mod.provider("modal", function() {
+    var ModalProvider;
+    return ModalProvider = {
       defaults: {
         containerTemplate: "<div class=\"ui modals dimmer visible active\"><div class=\"ui standard modal visible active\"></div></div>",
         containerTemplateUrl: null,
@@ -23,7 +23,7 @@ popeye = function(angular) {
         click: true
       },
       $get: ["$q", "$animate", "$rootScope", "$document", "$http", "$templateCache", "$compile", "$controller", "$injector", function($q, $animate, $rootScope, $document, $http, $templateCache, $compile, $controller, $injector) {
-        var PopeyeModal, currentModal, pendingPromise;
+        var Modal, currentModal, pendingPromise;
         currentModal = null;
         pendingPromise = null;
         $document.on("keydown", function(evt) {
@@ -33,8 +33,8 @@ popeye = function(angular) {
             });
           }
         });
-        PopeyeModal = (function() {
-          function PopeyeModal(options) {
+        Modal = (function() {
+          function Modal(options) {
             if (options == null) {
               options = {};
             }
@@ -45,7 +45,7 @@ popeye = function(angular) {
             if (!((options.template != null) || (options.templateUrl != null))) {
               throw new Error("template or templateUrl must be provided");
             }
-            this.options = angular.extend(angular.copy(PopeyeProvider.defaults), options);
+            this.options = angular.extend(angular.copy(ModalProvider.defaults), options);
             this.resolvedDeferred = $q.defer();
             this.resolved = this.resolvedDeferred.promise;
             this.openedDeferred = $q.defer();
@@ -54,7 +54,7 @@ popeye = function(angular) {
             this.closed = this.closedDeferred.promise;
           }
 
-          PopeyeModal.prototype.resolve = function() {
+          Modal.prototype.resolve = function() {
             if (this.resolving) {
               return this.resolved;
             }
@@ -92,7 +92,7 @@ popeye = function(angular) {
             return this.resolved;
           };
 
-          PopeyeModal.prototype.open = function() {
+          Modal.prototype.open = function() {
             var promise;
             if (this.opening) {
               return this.opened;
@@ -154,7 +154,9 @@ popeye = function(angular) {
                       if (_this.options.bodyClass) {
                         body.addClass(_this.options.bodyClass);
                       }
-                      return $animate.enter(_this.container, body, bodyLastChild).then(function() {
+                      return $animate.enter(_this.container, body, bodyLastChild, {
+                        addClass: 'animating fade in'
+                      }).then(function() {
                         currentModal = _this;
                         return _this.openedDeferred.resolve(_this);
                       });
@@ -172,7 +174,7 @@ popeye = function(angular) {
             return this.opened;
           };
 
-          PopeyeModal.prototype.close = function(value) {
+          Modal.prototype.close = function(value) {
             if (this.closing) {
               return this.closed;
             }
@@ -182,7 +184,9 @@ popeye = function(angular) {
                 if (_this.container == null) {
                   throw new Error("@container is undefined");
                 }
-                return $animate.leave(_this.container).then(function() {
+                return $animate.leave(_this.container, {
+                  addClass: 'animating fade out'
+                }).then(function() {
                   currentModal = null;
                   if (!_this.options.scope) {
                     _this.scope.$destroy();
@@ -197,13 +201,13 @@ popeye = function(angular) {
             return this.closed;
           };
 
-          PopeyeModal.prototype.handleError = function(error) {
+          Modal.prototype.handleError = function(error) {
             this.resolvedDeferred.reject(error);
             this.openedDeferred.reject(error);
             return this.closedDeferred.reject(error);
           };
 
-          return PopeyeModal;
+          return Modal;
 
         })();
         return {
@@ -212,7 +216,7 @@ popeye = function(angular) {
             if (options == null) {
               options = {};
             }
-            modal = new PopeyeModal(options);
+            modal = new Modal(options);
             modal.open();
             return modal;
           },
