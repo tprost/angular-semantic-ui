@@ -1,13 +1,13 @@
 angular.module('demo', ['ui']);
 
-angular.module('demo').directive('demoOnTheFlyModalButton', function(modal) {
+angular.module('demo').directive('demoOnTheFlyModalButton', function(modalService) {
 
   return {
     restrict: 'ACE',
     link: function(scope, elem, attrs) {
       elem.bind('click', function(e) {
         e.preventDefault();
-        modal.openModal({
+        modalService.openModal({
 
           template: '<div class="header">Header</div>' +
             '<div class="content">' +
@@ -22,7 +22,7 @@ angular.module('demo').directive('demoOnTheFlyModalButton', function(modal) {
 
 });
 
-angular.module('demo').directive('demoInlineModalButton', function(modal) {
+angular.module('demo').directive('demoInlineModalButton', function() {
 
   return {
     restrict: 'ACE',
@@ -39,7 +39,7 @@ angular.module('demo').directive('demoInlineModalButton', function(modal) {
 
 });
 
-angular.module('demo').directive('demoDimmerButton', function(modal) {
+angular.module('demo').directive('demoDimmerButton', function() {
 
   return {
     restrict: 'ACE',

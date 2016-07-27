@@ -6,7 +6,7 @@ popeye = function(angular) {
   "use strict";
   var mod;
   mod = angular.module("ui.modal", ["ui.dimmer"]);
-  return mod.provider("modal", function() {
+  return mod.provider("modalService", function() {
     var ModalProvider;
     return ModalProvider = {
       defaults: {

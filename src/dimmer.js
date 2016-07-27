@@ -19,6 +19,7 @@ angular.module('ui.dimmer').controller('DimmerController', function($animate, $e
 
   this.$setDimmable = function(dimmable) {
     $dimmable = angular.element(dimmable);
+    $dimmable.addClass('dimmable');
   };
 
   this.is = {
