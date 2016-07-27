@@ -1,4 +1,4 @@
-angular.module('ui.dimmer', ['ngAnimate']);
+angular.module('ui.dimmer', []);
 
 
 

@@ -1,37 +1,42 @@
-angular.module('ui.modal').controller('ModalController', function($document, $element, $scope, $compile, $animate) {
+angular.module('ui.modal').controller('ModalController', function($document, $element, $scope, $compile, $animate, $animateCss) {
 
-  var controller = this;
+  var vm = this;
   var $dimmer;
   // original parent of the modal
-  var parent;
+  var parent = angular.element($element.parent());
 
   $element.addClass('transition');
 
   this.show = function() {
-    $element.addClass('visible');
-
 
     var body, bodyLastChild;
     body = angular.element($document.find('body'));
     body.addClass('dimmable dimmed');
     $dimmer = angular.element('<div class="ui dimmer transition active visible"></div>');
     $compile($dimmer)($scope);
-    $dimmer.controller('dimmer').$setDimmable(body);
+    $dimmer.controller('dimmer').set.dimmable(body);
 
     $dimmer.bind('click', function(e) {
-      controller.hide();
+      vm.hide();
     });
 
     body.append($dimmer);
-    $dimmer.append(this.modal);
+    $dimmer.append($element);
 
     $dimmer.controller('dimmer').show().then(function() {
 
     });
 
-    $animate.addClass($element, 'animating fade in').then(function() {
+    $element.addClass('visible');
+
+    $animateCss($element, {
+      addClass: 'animating scale in'
+    }).start().then(function() {
       $element.addClass('active');
+      $element.removeClass('animating scale in');
     });
+
+    //    $element.addClass('animating scale in');
 
 
   };
@@ -39,8 +44,8 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
   this.hide = function() {
 
     $animate.addClass($element, 'animating fade out').then(function() {
-      parent.append(this.modal);
-      this.modal.removeClass('active visible');
+      parent.append($element);
+      $element.removeClass('active visible animating fade out');
     });
 
 
@@ -51,14 +56,4 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
 
   };
 
-});
-
-angular.module('ui.modal').directive('modal', function() {
-  return {
-    restrict: 'C',
-    controller: 'ModalController',
-    link: function(scope, elem, attrs, ctrl) {
-
-    }
-  };
 });

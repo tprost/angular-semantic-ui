@@ -1,77 +1,111 @@
-angular.module('ui.dimmer').controller('DimmerController', function($animate, $element, $scope) {
+angular.module('ui.dimmer').controller('DimmerController', function($animateCss, $element, $scope, $animate) {
 
-  this.$element = angular.element($element);
-  var $dimmable = angular.element($element.parent());
-  var $dimmer = this.$element;
+  var vm = this;
 
-  $dimmer.addClass('transition');
-
-  var transition = 'fade';
-  var ctrl = this;
-
-  this.$setDimmable = function(dimmable) {
+  var $setDimmable = function(dimmable) {
     $dimmable = angular.element(dimmable);
     $dimmable.addClass('dimmable');
   };
 
-  this.is = {
-    active: function() {
-      return $dimmer.hasClass('active');
-    }
+  vm.is = {
+    active: isActive,
+    animating: isAnimating
   };
 
-  this.set = {
-    active: function() {
-      $dimmer.addClass('active');
-    },
-    dimmable: function() {
-      $dimmable.addClass('dimmable');
-    },
-    dimmed: function() {
-      $dimmable.addClass('dimmed');
-    }
+  vm.get = {
+    dimmer: getDimmer,
+    duration: getDuration
+  };
+  vm.set = {
+    active: setActive,
+    dimmed: setDimmed,
+    dimmable: setDimmable
+  };
+  vm.remove = {
+    active: removeActive,
+    dimmed: removeDimmed,
+    dimmable: removeDimmable
+  };
+  vm.show = show;
+  vm.hide = hide;
+  vm.toggle = toggle;
+
+  var $dimmable = angular.element($element.parent());
+  var $dimmer = $element;
+
+  function getDimmer() {
+    return $element;
   };
 
-  this.remove = {
-    active: function() {
-      $dimmer.removeClass('active');
-    },
-    dimmable: function() {
-      $dimmable.removeClass('dimmable');
-    },
-    dimmed: function() {
-      $dimmable.removeClass('dimmed');
-    }
+  function getDuration() {
+    // TODO
   };
 
-  this.show = function() {
-
-    this.set.dimmed();
-    var animation = $animate.addClass($element, 'visible animating fade in');
-
+  function hide() {
+    var animation = $animate.addClass($element, 'animating fade out');
     animation.then(function() {
-      ctrl.set.active();
+      vm.remove.active();
+      $element.removeClass('visible active animating fade out');
+      vm.remove.dimmed();
+    });
+    $scope.$digest();
+    return animation;
+  };
+
+  function isActive() {
+    return $dimmer.hasClass('active');
+  };
+  function isAnimating() {
+    // TODO
+  };
+
+
+
+  function removeActive() {
+    $dimmer.removeClass('active');
+  };
+
+  function removeDimmable() {
+    $dimmable.removeClass('dimmable');
+  };
+
+  function removeDimmed() {
+    $dimmable.removeClass('dimmed');
+  };
+
+  function setActive() {
+    $dimmer.addClass('active');
+  };
+
+  function setDimmable() {
+    $dimmable.addClass('dimmable');
+  };
+
+  function setDimmed() {
+    $dimmable.addClass('dimmed');
+  };
+
+  function show() {
+    $element.attr('ng-animate-children', true);
+    vm.set.dimmed();
+    var animation = $animateCss($element, {
+      addClass: 'visible animating fade in'
+    }).start();
+    animation.then(function() {
+      vm.set.active();
       $element.removeClass('animating fade in');
     });
     $scope.$digest();
     return animation;
   };
 
-  this.hide = function() {
-
-    var animation = $animate.addClass($element, 'animating fade out');
-    animation.then(function() {
-
-      ctrl.remove.active();
-      $element.removeClass('visible active animating fade out');
-      this.remove.dimmed();
-    });
-    $scope.$digest();
-    return animation;
+  function toggle() {
+    vm.is.active() ? vm.hide() : vm.show();
   };
 
-  this.toggle = function() {
-    this.is.active() ? this.hide() : this.show();
-  };
+
+  $dimmer.addClass('transition');
+
+  var transition = 'fade';
 
 });

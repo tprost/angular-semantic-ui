@@ -1,4 +1,4 @@
-angular.module('demo', ['ui']);
+angular.module('demo', ['ui', 'ngAnimate']);
 
 angular.module('demo').directive('demoOnTheFlyModalButton', function(modalService) {
 
