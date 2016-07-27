@@ -2,11 +2,6 @@ angular.module('ui.dimmer').controller('DimmerController', function($animateCss,
 
   var vm = this;
 
-  var $setDimmable = function(dimmable) {
-    $dimmable = angular.element(dimmable);
-    $dimmable.addClass('dimmable');
-  };
-
   vm.is = {
     active: isActive,
     animating: isAnimating

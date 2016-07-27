@@ -1,13 +1,22 @@
 angular.module('ui.modal').controller('ModalController', function($document, $element, $scope, $compile, $animateCss) {
 
   var vm = this;
+
+  vm.is = {
+    active: isActive
+  };
+
+  vm.hide = hide;
+  vm.show = show;
+  vm.toggle = toggle;
+
   var $dimmer;
   // original parent of the modal
-  var parent = angular.element($element.parent());
+  var $parent = angular.element($element.parent());
 
   $element.addClass('transition');
 
-  this.show = function() {
+  function show() {
 
     var body, bodyLastChild;
     body = angular.element($document.find('body'));
@@ -37,16 +46,15 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
     });
 
     //    $element.addClass('animating scale in');
-
-
   };
 
-  this.hide = function() {
+
+  function hide() {
 
     $animateCss($element, {
       addClass: 'animating fade out'
     }).start().then(function() {
-      parent.append($element);
+      $parent.append($element);
       $element.removeClass('active visible animating fade out');
     });
 
@@ -54,6 +62,14 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
       $dimmer.remove();
     });
 
+  };
+
+  function isActive() {
+    return $element.hasClass('active');
+  };
+
+  function toggle() {
+    vm.is.active() ? vm.hide() : vm.show();
   };
 
 });
