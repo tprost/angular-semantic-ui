@@ -1,4 +1,4 @@
-angular.module('ui.dimmer').controller('DimmerController', function($animateCss, $element, $scope, $animate) {
+angular.module('ui.dimmer').controller('DimmerController', function($animateCss, $element, $scope) {
 
   var vm = this;
 
@@ -42,14 +42,15 @@ angular.module('ui.dimmer').controller('DimmerController', function($animateCss,
   };
 
   function hide() {
-    var animation = $animate.addClass($element, 'animating fade out');
-    animation.then(function() {
+    var promise = $animateCss($element, {
+      addClass: 'animating fade out'
+    }).start().then(function() {
       vm.remove.active();
       $element.removeClass('visible active animating fade out');
       vm.remove.dimmed();
     });
     $scope.$digest();
-    return animation;
+    return promise;
   };
 
   function isActive() {
@@ -88,15 +89,14 @@ angular.module('ui.dimmer').controller('DimmerController', function($animateCss,
   function show() {
     $element.attr('ng-animate-children', true);
     vm.set.dimmed();
-    var animation = $animateCss($element, {
+    var promise = $animateCss($element, {
       addClass: 'visible animating fade in'
-    }).start();
-    animation.then(function() {
+    }).start().then(function() {
       vm.set.active();
       $element.removeClass('animating fade in');
     });
     $scope.$digest();
-    return animation;
+    return promise;
   };
 
   function toggle() {

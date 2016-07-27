@@ -1,4 +1,4 @@
-angular.module('ui.modal').controller('ModalController', function($document, $element, $scope, $compile, $animate, $animateCss) {
+angular.module('ui.modal').controller('ModalController', function($document, $element, $scope, $compile, $animateCss) {
 
   var vm = this;
   var $dimmer;
@@ -43,12 +43,12 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
 
   this.hide = function() {
 
-    $animate.addClass($element, 'animating fade out').then(function() {
+    $animateCss($element, {
+      addClass: 'animating fade out'
+    }).start().then(function() {
       parent.append($element);
       $element.removeClass('active visible animating fade out');
     });
-
-
 
     $dimmer.controller('dimmer').hide().then(function() {
       $dimmer.remove();
