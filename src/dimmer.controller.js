@@ -1,11 +1,3 @@
-angular.module('ui.dimmer', ['ngAnimate']);
-
-angular.module('ui.dimmer').controller('DimmableController', function($element) {
-
-  this.$element = angular.element($element);
-
-});
-
 angular.module('ui.dimmer').controller('DimmerController', function($animate, $element, $scope) {
 
   this.$element = angular.element($element);
@@ -82,25 +74,4 @@ angular.module('ui.dimmer').controller('DimmerController', function($animate, $e
     this.is.active() ? this.hide() : this.show();
   };
 
-});
-
-angular.module('ui.dimmer').directive('dimmable', function() {
-  return {
-    restrict: 'C',
-    controller: 'DimmableController',
-    link: function(scope, elem, attrs, ctrl) {
-
-    }
-  };
-});
-
-angular.module('ui.dimmer').directive('dimmer', function() {
-  return {
-    restrict: 'C',
-    require: '?^dimmable',
-    controller: 'DimmerController',
-    link: function(scope, elem, attrs, ctrl) {
-      if (angular.isArray(ctrl) && ctrl[1]) ctrl[0].$setDimmable(ctrl[1].$element);
-    }
-  };
 });

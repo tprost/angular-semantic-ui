@@ -1,0 +1,16 @@
+{
+  "js": {
+    "lib": [
+      "bower_components/angular/angular.js",
+      "bower_components/angular-animate/angular-animate.js"
+    ],
+    "src": [
+      "src/**/*.module.js",
+      "src/**/*.js"
+    ],
+    "test": [
+      "bower_components/angular-mocks/angular-mocks.js",
+      "test/**/*.js"
+    ]
+  }
+}

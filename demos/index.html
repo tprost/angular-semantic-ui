@@ -10,15 +10,7 @@
     <title>Modal Example</title>
 
     <link rel="stylesheet" type="text/css" href="../semantic/dist/semantic.css">
-    <script src="../bower_components/angular/angular.js"></script>
-    <script src="../bower_components/angular-animate/angular-animate.js"></script>
 
-
-    <script src="../src/dimmer.js"></script>
-    <script src="../src/modal.js"></script>
-    <script src="../src/inline-modal.js"></script>
-    <script src="../src/ui.js"></script>
-    <script src="./demo.js"></script>
     <style>
      body {
          padding: 5rem;
@@ -62,6 +54,17 @@
       </div>
     </div>
 
+
+    {% for script in js %}
+    <script src="/{{ script }}"></script>
+    {% endfor %}
+
+    <script src="./demo.js"></script>
+
+
+
   </body>
+
+
 
 </html>
