@@ -1,3 +1,10 @@
+/**
+ * @ngdoc controller
+ * @name ui.dimmer.controller:DimmerController
+ * @description
+ * The controller for a `dimmer` element.
+ *
+ **/
 angular.module('ui.dimmer').controller('DimmerController', function($animateCss, $element, $scope) {
 
   var vm = this;
@@ -36,6 +43,15 @@ angular.module('ui.dimmer').controller('DimmerController', function($animateCss,
     // TODO
   };
 
+
+  /**
+   * @ngdoc
+   * @name ui.dimmer.controller:DimmerController#hide
+   * @methodOf ui.dimmer.controller:DimmerController
+   *
+   * @description
+   * Hide the dimmer. Animate out the dimmer if `ngAnimate` is available.
+   */
   function hide() {
     var promise = $animateCss($element, {
       addClass: 'animating fade out'
@@ -81,6 +97,14 @@ angular.module('ui.dimmer').controller('DimmerController', function($animateCss,
     $dimmable.addClass('dimmed');
   };
 
+  /**
+   * @ngdoc
+   * @name ui.dimmer.controller:DimmerController#show
+   * @methodOf ui.dimmer.controller:DimmerController
+   *
+   * @description
+   * Show the dimmer. Animate in the dimmer first if `ngAnimate` is available.
+   */
   function show() {
     $element.attr('ng-animate-children', true);
     vm.set.dimmed();
@@ -94,6 +118,14 @@ angular.module('ui.dimmer').controller('DimmerController', function($animateCss,
     return promise;
   };
 
+  /**
+   * @ngdoc
+   * @name ui.dimmer.controller:DimmerController#toggle
+   * @methodOf ui.dimmer.controller:DimmerController
+   *
+   * @description
+   * Show the dimmer if hidden. Hide the dimmer if visible.
+   */
   function toggle() {
     vm.is.active() ? vm.hide() : vm.show();
   };

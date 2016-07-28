@@ -1,3 +1,10 @@
+/**
+ * @ngdoc controller
+ * @name ui.modal.controller:ModalController
+ * @description
+ * The controller for a `modal` element.
+ *
+ **/
 angular.module('ui.modal').controller('ModalController', function($document, $element, $scope, $compile, $animateCss) {
 
   var vm = this;
@@ -16,6 +23,14 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
 
   $element.addClass('transition');
 
+  /**
+   * @ngdoc
+   * @name ui.modal.controller:ModalController#show
+   * @methodOf ui.modal.controller:ModalController
+   *
+   * @description
+   * Show the modal. Returns promise.
+   */
   function show() {
 
     var body, bodyLastChild;
@@ -48,7 +63,14 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
     //    $element.addClass('animating scale in');
   };
 
-
+  /**
+   * @ngdoc
+   * @name ui.modal.controller:ModalController#hide
+   * @methodOf ui.modal.controller:ModalController
+   *
+   * @description
+   * Hide the modal. Returns promise.
+   */
   function hide() {
 
     $animateCss($element, {
