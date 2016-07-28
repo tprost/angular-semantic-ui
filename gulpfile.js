@@ -3,6 +3,12 @@ const nunjucks = require('gulp-nunjucks');
 const glob = require('glob');
 const fs = require('fs');
 const _ = require('lodash');
+const express = require('express');
+const livereload = require('express-livereload');
+
+gulp.task('build', function() {
+
+});
 
 gulp.task('demos:static', function() {
   gulp.src('demos/**/*.js')
@@ -32,6 +38,24 @@ gulp.task('docs', function(done) {
 
 });
 
+gulp.task('serve', function() {
+  var app = express();
+
+
+
+  app.use(express.static('dist'));
+  app.use('/bower_components', express.static('bower_components'));
+  app.use('/src', express.static('src'));
+  app.use('/semantic', express.static('semantic'));
+
+  livereload(app);
+
+  // start server
+  var port = process.env.PORT || 3000;
+  console.log("server started on port " + port);
+  app.listen(port);
+
+});
 // parses config file
 function configObject() {
   return JSON.parse(fs.readFileSync('config.json', 'utf8'));

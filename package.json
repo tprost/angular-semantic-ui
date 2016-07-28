@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "coffee --compile karma.conf.coffee",
-    "docs": "grunt ngdocs"
+    "docs": "grunt ngdocs",
+    "build:semantic": "cd semantic && gulp build",
+    "build": "bower install && gulp build && npm run build:semantic"
   },
   "author": "",
   "license": "ISC",
@@ -18,6 +20,7 @@
     "del": "^2.2.1",
     "dgeni-alive": "^0.3.2",
     "express": "^4.14.0",
+    "express-livereload": "0.0.24",
     "extend": "^3.0.0",
     "glob": "^7.0.5",
     "grunt": "^1.0.1",
