@@ -78,6 +78,8 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
     }).start().then(function() {
       $parent.append($element);
       $element.removeClass('active visible animating fade out');
+      var body = angular.element($document.find('body'));
+      body.removeClass('dimmable dimmed');
     });
 
     $dimmer.controller('dimmer').hide().then(function() {

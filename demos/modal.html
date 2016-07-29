@@ -1,0 +1,82 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<div class="article">
+  <div class="ui masthead vertical segment">
+    <div class="ui container">
+      <div class="ui standard test modal">
+        <div class="header">
+          Select a Photo
+        </div>
+        <div class="image content">
+          <div class="ui medium image">
+            <img src="/images/avatar/nan.jpg">
+          </div>
+          <div class="description">
+            <div class="ui header">Default Profile Image</div>
+            <p>We've found the following <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your e-mail address.</p>
+            <p>Is it okay to use this photo?</p>
+          </div>
+        </div>
+        <div class="actions">
+          <div class="ui black deny button">
+            Nope
+          </div>
+          <div class="ui positive right labeled icon button">
+            Yep, that's me
+            <i class="checkmark icon"></i>
+          </div>
+        </div>
+      </div>
+      <div class="introduction">
+        <h1 class="ui header">
+          Modal
+          <div class="sub header">
+            A modal opens with a dimmer.
+          </div>
+        </h1>
+        <div class="ui divider"></div>
+        <h2>Usage</h2>
+        <article class="example">
+          <h3 class="ui header">Inline Modal</h3>
+          <p>You can open an existing modal with its controller.</p>
+          <div class="ui ignored info message">
+            A modal can be created by simply have the modal exist on the page when Angular bootstraps.
+          </div>
+          <button id="example-modal-standard-show-button" type="button" class="ui black pointing below ignored label">Run Code</button>
+          <div class="ui existing segment">
+            <pre>
+              <code class="code javascript">
+angular.element(document.querySelector('.ui.modal'))
+.controller('dimmer').show();;
+              </code>
+            </pre>
+          </div>
+        </article>
+        <article class="example">
+          <h3 class="ui header">On-The-Fly Modal</h3>
+          <p>You can open a modal dynamically using `modalService`</p>
+          <div class="ui ignored info message">
+            A modal can be created by simply have the modal exist on the page when Angular bootstraps.
+          </div>
+          <button id="example-modal-dynamic-show-button" type="button" class="ui black pointing below ignored label">Run Code</button>
+          <div class="ui existing segment">
+            <pre>
+              <code class="code javascript">
+modalService.openModal();
+              </code>
+            </pre>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block js %}
+{{ super() }}
+<script src="./modal.js"></script>
+
+{% endblock %}

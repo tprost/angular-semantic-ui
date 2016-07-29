@@ -1,0 +1,64 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<div class="article">
+  <div class="ui masthead vertical segment">
+    <div class="ui container">
+      <div class="introduction">
+        <h1 class="ui header">
+          Dimmer
+          <div class="sub header">
+            A dimmer hides distractions to focus attention on particular content.
+          </div>
+        </h1>
+        <div class="ui divider"></div>
+        <article class="example" id="example-dimmer-basic">
+          <h4 class="ui header">Dimmer</h4>
+          <p>A simple dimmer displays no content.</p>
+          <div class="ui existing segment">
+            <pre>
+              <code class="code javascript">
+angular.element(document.querySelector('.dimmer')).controller('dimmer').show();
+angular.element(document.querySelector('.dimmer')).controller('dimmer').hide();
+              </code>
+            </pre>
+          </div>
+          <div class="ui ignored info message">A dimmer will automatically be created when a dimming behavior is triggered on an element.
+          </div>
+          <div class="ui segment dimmable">
+            <h3 class="ui header">
+              Overlayable Section
+            </h3>
+            <div class="ui small images">
+              <img class="ui wireframe image" src="/demos/images/wireframe/image.png">
+              <img class="ui wireframe image" src="/demos/images/wireframe/image.png">
+              <img class="ui wireframe image" src="/demos/images/wireframe/image.png">
+            </div>
+            <img class="ui medium wireframe image" src="/demos/images/wireframe/media-paragraph.png">
+          </div>
+
+          <div class="ui ignored ignored icon buttons">
+            <button id="example-dimmer-basic-show-button" type="button" class="ui show button">
+              <i class="plus icon"></i>
+            </button>
+            <button id="example-dimmer-basic-hide-button" type="button" class="ui hide button">
+              <i class="minus icon"></i>
+            </button>
+          </div>
+        </article>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block js %}
+{{ super() }}
+<script src="./dimmer.js"></script>
+
+{% endblock %}

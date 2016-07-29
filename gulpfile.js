@@ -11,7 +11,7 @@ gulp.task('build', function() {
 });
 
 gulp.task('demos:static', function() {
-  gulp.src('demos/**/*.js')
+  gulp.src('demos/**/*.!(html)')
     .pipe(gulp.dest('dist/demos'));
 });
 
@@ -46,6 +46,7 @@ gulp.task('serve', function() {
   app.use(express.static('dist'));
   app.use('/bower_components', express.static('bower_components'));
   app.use('/src', express.static('src'));
+  app.use('/images', express.static('demos/images'));
   app.use('/semantic', express.static('semantic'));
 
   livereload(app);
