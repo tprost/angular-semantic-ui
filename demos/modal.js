@@ -4,9 +4,15 @@ angular.element(document.querySelector("#example-modal-standard-show-button"))
       document.querySelector(".ui.modal"));
 
     $modal.controller('modal').show();
+    $modal.scope().$digest();
 
   });
 
+angular.element(document.querySelector("#example-root-scope-digest-button"))
+  .bind('click', function(e) {
+    var $rootScope = angular.injector(['ng', 'ui']).get('$rootScope');
+    $rootScope.$digest();
+  });
 
 angular.element(document.querySelector("#example-modal-dynamic-show-button"))
   .bind('click', function(e) {

@@ -9,7 +9,7 @@ angular.module('ui.modal').provider('modalService', function() {
   var ModalProvider;
   return ModalProvider = {
     defaults: {
-      containerTemplate: "<div class=\"ui modals dimmer visible active\"><div class=\"ui standard modal visible active\"></div></div>",
+      containerTemplate: "<div class=\"ui standard modal\"></div>",
       containerTemplateUrl: null,
       bodyClass: "dimmable dimmed",
       containerClass: null,
@@ -150,6 +150,7 @@ angular.module('ui.modal').provider('modalService', function() {
                       });
                     }
                     _this.container = $compile(containerElement)(_this.scope);
+
                     _this.element = angular.element(_this.container[0].querySelector(".ui.modal"));
                     if (_this.options.modalClass) {
                       _this.element.addClass(_this.options.modalClass);
@@ -161,6 +162,10 @@ angular.module('ui.modal').provider('modalService', function() {
                     if (_this.options.bodyClass) {
                       body.addClass(_this.options.bodyClass);
                     }
+//                     if (_this.container.controller('modal')) {
+//                       _this.container.controller('modal').show();
+// currentModal = _this;
+//                     }
                     return $animate.enter(_this.container, body, bodyLastChild, {
                       addClass: 'animating fade in'
                     }).then(function() {
@@ -191,6 +196,7 @@ angular.module('ui.modal').provider('modalService', function() {
               if (_this.container == null) {
                 throw new Error("@container is undefined");
               }
+
               return $animate.leave(_this.container, {
                 addClass: 'animating fade out'
               }).then(function() {
@@ -203,6 +209,7 @@ angular.module('ui.modal').provider('modalService', function() {
               }, function(error) {
                 return _this.handleError(error);
               });
+
             };
           })(this));
           return this.closed;
