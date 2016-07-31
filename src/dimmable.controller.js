@@ -109,6 +109,7 @@ angular.module('ui.dimmer').controller('DimmableController', function($element, 
     $element.append($dimmer);
     $compile($dimmer)($scope);
     dimmerController = $dimmer.controller('dimmer');
+    dimmerController.set.dimmable($element);
   };
 
 
