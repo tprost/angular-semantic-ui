@@ -91,7 +91,7 @@
                 };
               })(this));
             });
-            it("close modal when clicked on the container", function() {
+            xit("close modal when clicked on the container", function() {
               this.modal.element.controller('modal').get.dimmer().trigger("click");
               expect(this.modal.closing).toBe(true);
               this.$animate.flush();
