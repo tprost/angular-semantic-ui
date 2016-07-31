@@ -25,7 +25,8 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
   };
 
   vm.remove = {
-    visible: removeVisible
+    visible: removeVisible,
+    dimmer: removeDimmer
   };
 
   vm.hide = hide;
@@ -36,17 +37,25 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
 
   vm.get = {
     dimmer: getDimmer,
+    parent: getParent,
     modal: getModal
+  };
+
+  vm.has = {
+    dimmer: hasDimmer,
+    parent: hasParent
   };
 
   vm.showDimmer = showDimmer;
   vm.hideDimmer = hideDimmer;
 
-  var $dimmer, dimmableController;
+  var $dimmer, dimmerController;
 
   vm.settings = {
 
   };
+
+  var deferredShow, deferredHide;
 
   /**
    * @ngdoc
@@ -60,6 +69,9 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
     visible = true;
     if (!active) animatingIn = true;
     animatingOut = false;
+    if (deferredShow) return deferredShow.promise;
+    deferredShow = $q.defer();
+    return deferredShow.promise;
   };
 
   /**
@@ -74,6 +86,9 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
     active = false;
     animatingIn = false;
     if (visible) animatingOut = true;
+    if (deferredHide) return deferredHide.promise;
+    deferredHide = $q.defer();
+    return deferredHide.promise;
   };
 
   function toggle() {
@@ -130,19 +145,18 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
   };
 
   function createDimmer() {
-    var $dimmable = angular.element('<div class="ui dimmable"></div>');
+    var $dimmer = angular.element('<div class="ui dimmer"></div>');
     var $body = angular.element($document.find('body'));
-    $body.addClass('dimmable');
-    $body.addClass('dimmed');
-    $compile($dimmable)($scope);
-    dimmableController = $dimmable.controller('dimmable');
-    $dimmer = angular.element($dimmable.children()[0]);
+
+    $compile($dimmer)($scope);
+    dimmerController = $dimmer.controller('dimmer');
     $body.append($dimmer);
     $dimmer.controller('dimmer').set.dimmable($body);
-    $dimmer.bind('click', function() {
-      $scope.$apply(function() {
-        vm.hide();
-      });
+
+    $dimmer.bind('click', function(e) {
+      if (e.target === e.currentTarget) {
+        $scope.$apply(vm.hide);
+      }
     });
     $dimmer.append($element);
 
@@ -150,17 +164,16 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
   };
 
   function showDimmer() {
-    if (!$dimmer) createDimmer();
-    return dimmableController.show();
+    if (!$dimmer) $dimmer = createDimmer();
+    return dimmerController.show();
   };
 
   function hideDimmer() {
-    if ($dimmer) return dimmableController.hide();
-    return true;
+    return dimmerController.hide();
   };
 
   function isDimmerVisible() {
-    return dimmableController ? dimmableController.is.visible() : false;
+    return dimmerController ? dimmerController.is.visible() : false;
   };
 
   function refresh() {
@@ -171,25 +184,43 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
   active = $element.hasClass('active');
   visible = $element.hasClass('visible');
   // original parent of the modal
-  $parent = angular.element($element.parent());
+  $parent = $element.parent() ? angular.element($element.parent()) : null;
 
   $element.addClass('transition');
 
   this.$doCheck = function() {
-    if (!visible && !active) {
-      if ($parent) {
-        $parent.append($element);
-      } else {
-        $element.remove();
-      }
-      if ($dimmer) {
-        $dimmer.remove();
-        $dimmer = null;
-        dimmableController = null;
-      }
-    }
+
   };
 
+  $scope.$watch(function() {
+    return visible && active && dimmerController && dimmerController.is.active();
+  }, function(shown) {
+    if (deferredShow) deferredShow.resolve($element);
+    deferredShow = null;
+  });
 
+  $scope.$watch(function() {
+    return !visible && !active;
+  }, function(shown) {
+    if (deferredHide) deferredHide.resolve($element);
+    deferredHide = null;
+  });
+
+  function hasParent() {
+    return angular.isElement($parent);
+  };
+
+  function hasDimmer() {
+    return angular.isElement($dimmer);
+  };
+
+  function getParent() {
+    return $parent;
+  };
+
+  function removeDimmer() {
+    $dimmer.remove();
+    $dimmer = null;
+  };
 
 });

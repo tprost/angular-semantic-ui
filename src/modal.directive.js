@@ -21,10 +21,31 @@ angular.module('ui.modal').directive('modal', function($document, $animate) {
 
       scope.$watch(ctrl.is.visible, function(visible, wasVisible) {
         elem.toggleClass('visible', visible);
-        if (visible) {
-          angular.element($document.find('body'))
-            .addClass('dimmmed');
+        if (!visible && !ctrl.is.active()) {
+          if (ctrl.has.parent()) {
+            ctrl.get.parent().append(elem);
+          } else {
+            elem.remove();
+          }
+          if (ctrl.has.dimmer()) {
+            ctrl.remove.dimmer();
+          }
+        }
+      });
+
+      scope.$watch(ctrl.is.animatingIn, function(animatingIn) {
+        if (animatingIn) {
           ctrl.showDimmer();
+
+          if (animation) $animate.cancel(animation);
+          elem.removeClass('out');
+          animation = $animate.addClass(elem, 'visible animating scale in').then(function() {
+            if (ctrl.is.animatingIn()) {
+              ctrl.set.active();
+            }
+          }).finally(function() {
+            elem.removeClass('animating scale in');
+          });
         }
       });
 
@@ -40,23 +61,7 @@ angular.module('ui.modal').directive('modal', function($document, $animate) {
           }).finally(function() {
             elem.removeClass('animating scale out');
           });
-        }
-      });
 
-      scope.$watch(ctrl.is.animatingIn, function(animatingIn) {
-        if (animatingIn) {
-          ctrl.showDimmer();
-          if (animation) $animate.cancel(animation);
-          elem.removeClass('out');
-
-          animation = $animate.addClass(elem, 'visible animating scale in').then(function() {
-            if (ctrl.is.animatingIn()) {
-              ctrl.set.active();
-            }
-          }).finally(function() {
-            elem.removeClass('animating scale in');
-          });
-          ctrl.refresh();
         }
       });
 

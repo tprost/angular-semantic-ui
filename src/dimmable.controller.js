@@ -1,11 +1,11 @@
-angular.module('ui.dimmer').controller('DimmableController', function($element, $scope, $compile) {
+angular.module('ui.dimmer').controller('DimmableController', function($element, $scope, $compile, $q) {
 
   var vm = this;
   var visible = false;
   var active = false;
   var animatingIn, animatingOut = false;
 
-  var $dimmer;
+  var $dimmer, dimmerController;
 
   vm.show = show;
   vm.hide = hide;
@@ -57,29 +57,31 @@ angular.module('ui.dimmer').controller('DimmableController', function($element, 
   };
 
   function hide() {
-    if (visible) animatingOut = true;
-    animatingIn = false;
-    active = false;
+    return dimmerController.hide();
   };
 
   function isActive() {
-    return active;
+    return dimmerController.is.active();
   };
 
   function isAnimating() {
-    return vm.isAnimatingIn() || vm.isAnimatingOut();
+    return dimmerController.is.animating();
   };
 
   function isAnimatingIn() {
-    return animatingIn;
+    return dimmerController.is.animatingIn();
   };
 
   function isAnimatingOut() {
-    return animatingOut;
+    return dimmerController.is.animatingOut();
   };
 
   function isVisible() {
-    return visible;
+    return dimmerController.is.visible();
+  };
+
+  function setActive() {
+    return dimmerController.set.active();
   };
 
   function setDimmer(dimmer) {
@@ -87,38 +89,28 @@ angular.module('ui.dimmer').controller('DimmableController', function($element, 
   };
 
   function setVisible() {
-    visible = true;
-  };
-
-  function setActive() {
-    animatingIn = false;
-    animatingOut = false;
-    visible = true;
-    active = true;
+    return dimmerController.set.visible();
   };
 
   function removeVisible() {
-    animatingOut = false;
-    animatingIn = false;
-    visible = false;
+    return dimmerController.remove.visible();
   };
 
   function removeActive() {
-    active = false;
+    return dimmerController.remove.active();
   };
 
   function show() {
-    animatingOut = false;
-    visible = true;
-    if (!active) {
-      animatingIn = true;
-    }
+    return dimmerController.show();
   };
 
   function create() {
     $dimmer = angular.element('<div class="ui dimmer"></div>');
     $element.append($dimmer);
     $compile($dimmer)($scope);
+    dimmerController = $dimmer.controller('dimmer');
   };
+
+
 
 });

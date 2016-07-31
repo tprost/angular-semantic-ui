@@ -141,17 +141,17 @@ angular.module('ui.modal').provider('modalService', function() {
                   }) : $q.reject("Missing containerTemplate or containerTemplateUrl");
                   return templatePromise.then(function(tmpl) {
                     var body, bodyLastChild;
-                    angular.element(containerElement[0].querySelector(".ui.modal")).append(tmpl.data);
-                    if (_this.options.click) {
-                      containerElement.on("click", function(evt) {
-                        if (evt.target === evt.currentTarget) {
-                          return _this.close();
-                        }
-                      });
-                    }
+                    containerElement.append(tmpl.data);
+                    // if (_this.options.click) {
+                    //   containerElement.on("click", function(evt) {
+                    //     if (evt.target === evt.currentTarget) {
+                    //       return _this.close();
+                    //     }
+                    //   });
+                    // }
                     _this.container = $compile(containerElement)(_this.scope);
 
-                    _this.element = angular.element(_this.container[0].querySelector(".ui.modal"));
+                    _this.element = _this.container;//angular.element(_this.container[0].querySelector(".ui.modal"));
                     if (_this.options.modalClass) {
                       _this.element.addClass(_this.options.modalClass);
                     }
@@ -162,16 +162,17 @@ angular.module('ui.modal').provider('modalService', function() {
                     if (_this.options.bodyClass) {
                       body.addClass(_this.options.bodyClass);
                     }
-//                     if (_this.container.controller('modal')) {
-//                       _this.container.controller('modal').show();
-// currentModal = _this;
-//                     }
-                    return $animate.enter(_this.container, body, bodyLastChild, {
-                      addClass: 'animating fade in'
-                    }).then(function() {
-                      currentModal = _this;
-                      return _this.openedDeferred.resolve(_this);
-                    });
+                    if (_this.container.controller('modal')) {
+                      _this.container.controller('modal').show().then(function() {
+                        currentModal = _this;
+                        return _this.openedDeferred.resolve(_this);
+                      });
+                    }
+                    // return $animate.enter(_this.container, body, bodyLastChild, {
+                    //   addClass: 'animating fade in'
+                    // }).then(function() {
+
+                    // });
                   });
                 });
               });
@@ -197,18 +198,22 @@ angular.module('ui.modal').provider('modalService', function() {
                 throw new Error("@container is undefined");
               }
 
-              return $animate.leave(_this.container, {
-                addClass: 'animating fade out'
-              }).then(function() {
+              return _this.container.controller('modal').hide().then(function() {
                 currentModal = null;
                 if (!_this.options.scope) {
                   _this.scope.$destroy();
                 }
-                $document.find("body").removeClass(_this.options.bodyClass);
+//                $document.find("body").removeClass(_this.options.bodyClass);
                 return _this.closedDeferred.resolve(value);
-              }, function(error) {
-                return _this.handleError(error);
               });
+
+              // return $animate.leave(_this.container, {
+              //   addClass: 'animating fade out'
+              // }).then(function() {
+
+              // }, function(error) {
+              //   return _this.handleError(error);
+              // });
 
             };
           })(this));

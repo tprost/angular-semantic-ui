@@ -1,1 +1,1 @@
-angular.module('ui.modal', ['ui.dimmer']);
+angular.module('ui.modal', ['ui.dimmer', 'ngAnimate']);

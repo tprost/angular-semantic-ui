@@ -3,7 +3,9 @@ angular.element(document.querySelector("#example-modal-standard-show-button"))
     var $modal = angular.element(
       document.querySelector(".ui.modal"));
 
-    $modal.controller('modal').show();
+    $modal.controller('modal').show().then(function() {
+      console.log('modal shown');
+    });
     $modal.scope().$digest();
 
   });
@@ -14,17 +16,23 @@ angular.element(document.querySelector("#example-root-scope-digest-button"))
     $rootScope.$digest();
   });
 
-angular.element(document.querySelector("#example-modal-dynamic-show-button"))
-  .bind('click', function(e) {
-    var modalService = angular.injector(['ng', 'ui']).get('modalService');
+angular.module('demo').directive('murder', function($compile, modalService) {
 
-    modalService.openModal({
+  return {
+    restrict: 'ACE',
+    link: function(scope, elem, attrs) {
+      elem.bind('click', function(e) {
+        e.preventDefault();
+        modalService.openModal({
+          template: '<div class="header">Header</div>' +
+            '<div class="content">' +
+            '<p>Paragraph.</p>' +
+            '<p>Paragraph.</p>' +
+            '<p>Paragraph.</p>' +
+            '</div>'
+        });
+      });
+    }
+  };
 
-      template: '<div class="header">Header</div>' +
-        '<div class="content">' +
-        '<p>Paragraph.</p>' +
-        '<p>Paragraph.</p>' +
-        '<p>Paragraph.</p>' +
-        '</div>'
-    });
-  });
+});

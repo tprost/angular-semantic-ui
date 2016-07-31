@@ -4,7 +4,9 @@ angular.element(document.querySelector("#example-dimmer-basic-show-button"))
       document.querySelector("#example-dimmer-basic")
         .querySelector('.dimmable'));
 
-    $dimmable.controller('dimmable').show();
+    $dimmable.controller('dimmable').show().then(function() {
+      console.log("dimmable shown");
+    });
     $dimmable.scope().$digest();
 
   });
@@ -16,7 +18,9 @@ angular.element(document.querySelector("#example-dimmer-basic-hide-button"))
       document.querySelector("#example-dimmer-basic")
         .querySelector('.dimmable'));
 
-    $dimmable.controller('dimmable').hide();
+    $dimmable.controller('dimmable').hide().then(function() {
+      console.log("dimmable hidden");
+    });
     $dimmable.scope().$digest();
 
   });

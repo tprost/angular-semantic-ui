@@ -5,4 +5,4 @@
  * The Dimmer module for Semantic UI, written in Angular JS.
  *
  **/
-angular.module('ui.dimmer', []);
+angular.module('ui.dimmer', ['ngAnimate']);
