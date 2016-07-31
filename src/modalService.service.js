@@ -198,15 +198,20 @@ angular.module('ui.modal').provider('modalService', function() {
                 throw new Error("@container is undefined");
               }
 
-              return _this.container.controller('modal').hide().then(function() {
-                currentModal = null;
-                if (!_this.options.scope) {
-                  _this.scope.$destroy();
-                }
-//                $document.find("body").removeClass(_this.options.bodyClass);
-                return _this.closedDeferred.resolve(value);
-              });
 
+              if (_this.container.controller('modal')) {
+                return _this.container.controller('modal').hide().then(function() {
+                  currentModal = null;
+                  if (!_this.options.scope) {
+                    _this.scope.$destroy();
+                  }
+                  //                $document.find("body").removeClass(_this.options.bodyClass);
+                  return _this.closedDeferred.resolve(value);
+                });
+
+              } else {
+                return _this.closedDeferred.resolve(value);
+              }
               // return $animate.leave(_this.container, {
               //   addClass: 'animating fade out'
               // }).then(function() {
