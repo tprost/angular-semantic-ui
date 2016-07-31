@@ -6,7 +6,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     ngdocs: {
       options: {
-        dest: 'dist/docs',
+        dest: 'dist/api',
         scripts: [
           'angular.js',
           '../src.js'

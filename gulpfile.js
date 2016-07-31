@@ -28,6 +28,7 @@ gulp.task('serve', function() {
   app.use(express.static('dist'));
   app.use('/bower_components', express.static('bower_components'));
   app.use('/src', express.static('src'));
+  app.use('/api', express.static('dist/api'));
   app.use('/images', express.static('docs/images'));
   app.use('/semantic', express.static('semantic'));
 
