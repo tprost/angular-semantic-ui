@@ -1,0 +1,13 @@
+.ui.logo.icon.image {
+  width: 35px;
+  margin-right: 1em;
+}
+.pusher {
+  margin-left: 15rem;
+  min-height: 100vh;
+  width: calc(100% - 15rem);
+  padding-top: 5rem;
+}
+.example {
+  margin: 5rem 0;
+}

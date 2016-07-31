@@ -126,9 +126,9 @@ angular.module('ui.dimmer').controller('DimmerController', function($scope, $ele
   function removeActive() {
     active = false;
   };
-
-  active = $element.hasClass('active');
-  visible = $element.hasClass('visible');
+ 
+  active = $element.hasClass('active') || $element.hasClass('visible');
+  visible = active;
 
   $scope.$watch(function() {
     return visible && active;
