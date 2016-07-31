@@ -5,6 +5,7 @@ const fs = require('fs');
 const _ = require('lodash');
 const express = require('express');
 const livereload = require('express-livereload');
+const watch = require('gulp-watch');
 
 gulp.task('build', function() {
 
@@ -38,6 +39,11 @@ gulp.task('serve', function() {
   app.listen(port);
 
 });
+
+gulp.task('watch', function() {
+  gulp.watch('docs/**/*', ['demos']);
+});
+
 // parses config file
 function configObject() {
   return JSON.parse(fs.readFileSync('config.json', 'utf8'));

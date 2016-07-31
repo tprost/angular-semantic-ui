@@ -27,7 +27,7 @@
     </style>
   </head>
   <body ng-app="demo">
-    <div class="ui sidebar inverted vertical menu visible">
+    <nav class="ui sidebar inverted vertical menu visible">
       <div class="item">
         <a class="ui logo icon image">
           <img src="http://semantic-ui.com/images/logo.png">
@@ -36,13 +36,15 @@
           <b>UI Demos</b>
         </a>
       </div>
+      <a class="item" href="/api">API Documentation</a>
+      <div class="header item">Demos</div>
       <a class="item" href="/demos/dimmer.html">
         Dimmer
       </a>
       <a class="item" href="/demos/modal.html">
         Modal
       </a>
-    </div>
+    </nav>
     <div class="pusher">
       {% block content %}
       <!-- content -->
