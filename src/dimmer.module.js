@@ -1,8 +1,9 @@
 /**
- * @ngdoc overview
+ * @ngdoc module
  * @name ui.dimmer
+ * @module ui.dimmer
  * @description
- * The Dimmer module for Semantic UI, written in Angular JS.
  *
- **/
+ * Components for the Semantic UI Dimmer module.
+ */
 angular.module('ui.dimmer', ['ngAnimate']);

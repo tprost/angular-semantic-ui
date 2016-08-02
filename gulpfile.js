@@ -7,19 +7,50 @@ const express = require('express');
 const livereload = require('express-livereload');
 const watch = require('gulp-watch');
 
+var Dgeni = require('dgeni');
+
 gulp.task('build', function() {
 
 });
 
-gulp.task('demos:static', function() {
-  gulp.src('docs/**/*.!(html)')
-    .pipe(gulp.dest('dist'));
+// render documentation HTML snippets that we can use in the demo pages
+gulp.task('docs:api', function() {
+  try {
+    var dgeni = new Dgeni([require('./docs/api/dgeni-conf')]);
+    return dgeni.generate();
+  } catch(x) {
+    console.log(x.stack);
+    throw x;
+  }
 });
 
-gulp.task('demos', ['demos:static'], function() {
-  gulp.src('docs/**/*.html')
+gulp.task('docs:demos:static', function() {
+  gulp.src('docs/demos/**/*.!(html)')
+    .pipe(gulp.dest('dist/demos'));
+});
+
+gulp.task('docs:demos:dgeni', function() {
+  try {
+    var dgeni = new Dgeni([require('./docs/demos/dgeni-conf')]);
+    return dgeni.generate();
+  } catch(x) {
+    console.log(x.stack);
+    throw x;
+  }
+});
+
+gulp.task('docs:demos:nunjucks', ['docs:demos:dgeni'], function() {
+  gulp.src('docs/demos/*.html')
     .pipe(nunjucks.compile(demoData()))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('dist/demos'));
+});
+
+gulp.task('docs:demos', [
+  'docs:demos:static',
+  'docs:demos:nunjucks']);
+
+gulp.task('docs', ['docs:api', 'docs:demos'], function() {
+
 });
 
 gulp.task('serve', function() {
@@ -42,7 +73,7 @@ gulp.task('serve', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch('docs/**/*', ['demos']);
+  gulp.watch(['src/**/*.js', 'docs/**/*'], ['docs:demos']);
 });
 
 // parses config file

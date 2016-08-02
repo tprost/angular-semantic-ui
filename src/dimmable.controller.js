@@ -1,3 +1,13 @@
+/**
+ * @ngdoc type
+ * @name ui.dimmer.DimmableController
+ * @module ui.dimmer
+ * @description
+ *
+ * The controller used in `dimmable` directive. Use it to
+ * control the behaviour of the dimmer inside the dimmable.
+ * 
+ */
 angular.module('ui.dimmer').controller('DimmableController', function($element, $scope, $compile, $q) {
 
   var vm = this;
@@ -88,6 +98,16 @@ angular.module('ui.dimmer').controller('DimmableController', function($element, 
     $dimmer = angular.element(dimmer);
   };
 
+  /**
+   * @ngdoc method
+   * @name ui.dimmer.DimmableController#set.visible
+   *
+   * @description
+   * Makes the dimmer in the dimmable visible.
+   *
+   * @param {*} value The value of the input to check for emptiness.
+   * @returns {boolean} True if `value` is "empty".
+   */
   function setVisible() {
     return dimmerController.set.visible();
   };

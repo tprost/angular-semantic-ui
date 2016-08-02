@@ -1,8 +1,10 @@
 /**
- * @ngdoc controller
- * @name ui.dimmer.controller:DimmerController
+ * @ngdoc type
+ * @name ui.dimmer.DimmerController
+ * @module ui.dimmer
  * @description
- * The controller for a `dimmer` element.
+ * The controller used in `dimmer` directive. Use it to
+ * control the behaviour of the dimmer.
  *
  **/
 angular.module('ui.dimmer').controller('DimmerController', function($scope, $element, $q) {

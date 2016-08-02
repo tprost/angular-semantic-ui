@@ -1,10 +1,3 @@
-/**
- * @ngdoc service
- * @name ui.modal.service:modalService
- * @description
- * Service to help create modals on the fly.
- *
- */
 angular.module('ui.modal').provider('modalService', function() {
   var ModalProvider;
   return ModalProvider = {
@@ -33,13 +26,6 @@ angular.module('ui.modal').provider('modalService', function() {
         }
         return null;
       });
-      /**
-       * @ngdoc object
-       * @name ui.modal.object:Modal
-       * @description
-       * Modal object.
-       *
-       */
       Modal = (function() {
         function Modal(options) {
           if (options == null) {
@@ -236,13 +222,7 @@ angular.module('ui.modal').provider('modalService', function() {
       })();
       return {
         /**
-         * @ngdoc
-         * @name ui.modal.service:modalService#openModal
-         * @methodOf ui.modal.service:modalService
-         *
-         * @description
-         * Create a new modal and open it.
-         *
+         * 
          * @param {object} options Options on how to create the modal.
          * * `template` - HTML template that will be compiled with the modal scope & controller, then inserted into the modal container
          * * `templateUrl` - URL to GET the HTML template that will be compiled with the modal scope & controller, then inserted into the modal container. This is overriden by template

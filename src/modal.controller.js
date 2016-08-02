@@ -1,8 +1,9 @@
 /**
- * @ngdoc controller
- * @name ui.modal.controller:ModalController
+ * @ngdoc type
+ * @name ui.modal.ModalController
+ * @module ui.modal
  * @description
- * The controller for a `modal` element.
+ * The controller for the `modal` directive.
  *
  **/
 angular.module('ui.modal').controller('ModalController', function($document, $element, $scope, $compile, $animateCss, $q, $animate, $controller) {
@@ -58,9 +59,9 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
   var deferredShow, deferredHide;
 
   /**
-   * @ngdoc
-   * @name ui.modal.controller:ModalController#show
-   * @methodOf ui.modal.controller:ModalController
+   * @ngdoc function
+   * @name ui.modal.ModalController#show
+   * 
    *
    * @description
    * Show the modal.
@@ -75,9 +76,8 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
   };
 
   /**
-   * @ngdoc
-   * @name ui.modal.controller:ModalController#hide
-   * @methodOf ui.modal.controller:ModalController
+   * @ngdoc function
+   * @name ui.modal.ModalController#hide
    *
    * @description
    * Hide the modal.

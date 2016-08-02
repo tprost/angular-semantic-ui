@@ -1,11 +1,3 @@
-/**
- * @ngdoc directive
- * @name ui.modal.directive:modal
- * @restrict C
- * @description
- * Modal directive.
- *
- */
 angular.module('ui.modal').directive('modal', function($document, $animate) {
   return {
     restrict: 'C',
