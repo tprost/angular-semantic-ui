@@ -57,7 +57,7 @@ angular.element(document.querySelector('.dimmer')).controller('dimmer').hide();
 
 
   <section class="ui tab" data-tab="usage">
-
+    <p class="ui message info">Note that you need to run a `$digest()` yourself if you use these controllers directly.</p>
     {% include './dgeni/output/partials/api/ui.dimmer/type/ui.dimmer.DimmerController.html' %}
     {% include './dgeni/output/partials/api/ui.dimmer/type/ui.dimmer.DimmableController.html' %}
 

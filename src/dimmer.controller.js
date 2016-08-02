@@ -70,6 +70,15 @@ angular.module('ui.dimmer').controller('DimmerController', function($scope, $ele
   //   return angular.isElement($dimmer);
   // };
 
+  /**
+   * @ngdoc method
+   * @name ui.dimmer.DimmerController#hide
+   *
+   * @description
+   * Animate out the dimmer.
+   * @returns {Promise} `Promise` that resolves when the dimmer animates out.
+   *
+   */
   function hide() {
     if (visible) animatingOut = true;
     animatingIn = false;
@@ -79,6 +88,15 @@ angular.module('ui.dimmer').controller('DimmerController', function($scope, $ele
     return deferredHide.promise;
   };
 
+  /**
+   * @ngdoc method
+   * @name ui.dimmer.DimmerController#show
+   *
+   * @description
+   * Animate in the dimmer.
+   * @returns {Promise} `Promise` that resolves when the dimmer animates in.
+   *
+   */
   function show() {
     if (!active) animatingIn = true;
     animatingOut = false;
@@ -111,6 +129,7 @@ angular.module('ui.dimmer').controller('DimmerController', function($scope, $ele
   function setVisible() {
     visible = true;
   };
+
 
   function setActive() {
     animatingIn = false;

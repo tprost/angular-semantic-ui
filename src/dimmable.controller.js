@@ -105,13 +105,19 @@ angular.module('ui.dimmer').controller('DimmableController', function($element, 
    * @description
    * Makes the dimmer in the dimmable visible.
    *
-   * @param {*} value The value of the input to check for emptiness.
-   * @returns {boolean} True if `value` is "empty".
    */
   function setVisible() {
     return dimmerController.set.visible();
   };
 
+  /**
+   * @ngdoc method
+   * @name ui.dimmer.DimmableController#remove.visible
+   *
+   * @description
+   * Makes the dimmer in the dimmable hidden.
+   *
+   */
   function removeVisible() {
     return dimmerController.remove.visible();
   };
