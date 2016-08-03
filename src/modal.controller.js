@@ -6,11 +6,13 @@
  * The controller for the `modal` directive.
  *
  **/
-angular.module('ui.modal').controller('ModalController', function($document, $element, $scope, $compile, $animateCss, $q, $animate, $controller) {
+angular.module('ui.modal').controller('ModalController', function($document, $element, $scope, $q, modalSettings) {
 
   var vm = this;
   var active, visible, animatingIn, animatingOut;
   var $parent;
+
+  vm.settings = angular.copy(modalSettings.defaults);
 
   vm.is = {
     active: isActive,
@@ -55,7 +57,7 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
   /**
    * @ngdoc function
    * @name ui.modal.ModalController#show
-   * 
+   *
    *
    * @description
    * Show the modal.

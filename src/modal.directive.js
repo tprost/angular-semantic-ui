@@ -48,7 +48,8 @@ angular.module('ui.modal').directive('modal', function($document, $animate, $com
 
           if (animation) $animate.cancel(animation);
           elem.removeClass('out');
-          elem.css('margin-top', '-' + elem[0].offsetHeight / 2 + 'px');
+          if (ctrl.settings.centerUsingMarginTop)
+            elem.css('margin-top', '-' + elem[0].offsetHeight / 2 + 'px');
           animation = $animate.addClass(elem, 'visible animating scale in').then(function() {
             if (ctrl.is.animatingIn()) {
               ctrl.set.active();
