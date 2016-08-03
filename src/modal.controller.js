@@ -17,8 +17,7 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
     visible: isVisible,
     animating: isAnimating,
     animatingIn: isAnimatingIn,
-    animatingOut: isAnimatingOut,
-    dimmerVisible: isDimmerVisible
+    animatingOut: isAnimatingOut
   };
 
   vm.set = {
@@ -37,18 +36,13 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
   vm.refresh = refresh;
 
   vm.get = {
-    dimmer: getDimmer,
     parent: getParent,
     modal: getModal
   };
 
   vm.has = {
-    dimmer: hasDimmer,
     parent: hasParent
   };
-
-  vm.showDimmer = showDimmer;
-  vm.hideDimmer = hideDimmer;
 
   var $dimmer, dimmerController;
 
@@ -144,40 +138,8 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
     active = false;
   };
 
-  function createDimmer() {
-    var $dimmer = angular.element('<div class="ui dimmer"></div>');
-    var $body = angular.element($document.find('body'));
-
-    $compile($dimmer)($scope);
-    dimmerController = $dimmer.controller('dimmer');
-    $body.append($dimmer);
-    $dimmer.controller('dimmer').setDimmable($body);
-
-    $dimmer.bind('click', function(e) {
-      if (e.target === e.currentTarget) {
-        $scope.$apply(vm.hide);
-      }
-    });
-    $dimmer.append($element);
-
-    return $dimmer;
-  };
-
-  function showDimmer() {
-    if (!$dimmer) $dimmer = createDimmer();
-    return dimmerController.show();
-  };
-
-  function hideDimmer() {
-    return dimmerController.hide();
-  };
-
-  function isDimmerVisible() {
-    return dimmerController ? dimmerController.isvisible() : false;
-  };
-
   function refresh() {
-    $element.css('margin-top', '-' + $element[0].offsetHeight / 2 + 'px');
+
   };
 
 
