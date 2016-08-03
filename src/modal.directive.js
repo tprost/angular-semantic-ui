@@ -29,17 +29,21 @@ angular.module('ui.modal').directive('modal', function($document, $animate, $com
 
 
       function createDimmer() {
-        $dimmer = angular.element('<div class="ui dimmer visible"></div>');
-        $compile($dimmer)(scope);
-        $body.append($dimmer);
-        $dimmer.controller('dimmer').setDimmable($body);
-        $dimmer.bind('click', function(e) {
-          if (e.target === e.currentTarget) {
-            scope.$apply(ctrl.hide);
-          }
-        });
-        $dimmer.append(elem);
-        return $dimmer;
+				$dimmer = angular.element('<div class="ui dimmer visible"></div>');
+				$compile($dimmer)(scope);
+				$body.append($dimmer);
+				var dimmerController = $dimmer.controller('dimmer');
+				dimmerController.setDimmable($body);
+				$dimmer.bind('click', function(e) {
+					if (e.target === e.currentTarget) {
+						scope.$apply(ctrl.hide);
+					}
+				});
+				$dimmer.append(elem);
+				dimmerController.setVisible();
+				dimmerController.removeActive();
+				dimmerController.show();
+				return $dimmer;
       };
 
       scope.$watch(ctrl.is.animatingIn, function(animatingIn) {
