@@ -7,62 +7,75 @@
  *
  */
 angular.module('ui.dimmer').directive('dimmer', function($controller, $animate, $timeout) {
+
+  var animation;
+  var controller, dimmableController;
+
+
   return {
     restrict: 'C',
     require: '?^dimmable',
     controller: 'DimmerController',
-    link: function(scope, elem, attrs, ctrl) {
+    link: {
 
-      elem.attr('ng-animate-children', true);
 
-      var animation;
-      var controller, dimmableController;
+      pre: function(scope, elem ,attrs, ctrl) {
+        elem.attr('ng-animate-children', true);
 
-      if (angular.isArray(ctrl)) {
-        controller = ctrl[0];
-        dimmableController = ctrl[1];
-        dimmableController.set.dimmer(elem);
-        controller.set.dimmable(dimmableController.get.dimmable());
-      } else {
-        controller = elem.controller('dimmer');
+
+        if (angular.isArray(ctrl)) {
+          controller = ctrl[0];
+          dimmableController = ctrl[1];
+          dimmableController.setDimmer(elem);
+          controller.setDimmable(dimmableController.getDimmable());
+        } else {
+          controller = elem.controller('dimmer');
+        }
+      },
+
+      post: function(scope, elem, attrs, ctrl) {
+
+        scope.$watch(controller.isActive, function(active, wasActive) {
+          elem.toggleClass('active', active);
+        });
+
+        scope.$watch(controller.isVisible, function(visible, wasVisible) {
+          var $dimmable = controller.getDimmable();
+          if ($dimmable && !dimmableController) {
+            visible ?
+              $dimmable.addClass('ui dimmable dimmed')
+              : $dimmable.removeClass('dimmed');
+          }
+          elem.toggleClass('visible', visible && !controller.isAnimatingIn());
+        });
+
+        scope.$watch(controller.isAnimatingIn, function(animatingIn) {
+          if (animatingIn) {
+            if (animation) $animate.cancel(animation);
+            animation = $animate.setClass(elem, 'visible animating fade in', 'out').then(function() {
+              if (controller.isAnimatingIn())
+                controller.setActive();
+              elem.removeClass('animating fade in');
+            });
+          }
+        });
+
+        scope.$watch(controller.isAnimatingOut, function(animatingOut) {
+          if (animatingOut) {
+            if (animation) $animate.cancel(animation);
+            elem.removeClass('in');
+            animation = $animate.addClass(elem, 'visible animating fade out').then(function() {
+              if (controller.isAnimatingOut())
+                controller.removeVisible();
+              elem.removeClass('animating fade out');
+            }).finally(function() {
+
+            });
+          }
+        });
+
+
       }
-
-      scope.$watch(controller.is.active, function(active, wasActive) {
-        elem.toggleClass('active', active);
-      });
-
-      scope.$watch(controller.is.visible, function(visible, wasVisible) {
-        if (visible) controller.get.dimmable().addClass('ui dimmable dimmed');
-        if (!visible) controller.get.dimmable().removeClass('dimmed');
-        elem.toggleClass('visible', visible && !controller.is.animatingIn());
-      });
-
-      scope.$watch(controller.is.animatingIn, function(animatingIn) {
-        if (animatingIn) {
-          if (animation) $animate.cancel(animation);
-          animation = $animate.setClass(elem, 'visible animating fade in', 'out').then(function() {
-            if (controller.is.animatingIn())
-              controller.set.active();
-            elem.removeClass('animating fade in');
-          });
-        }
-      });
-
-      scope.$watch(controller.is.animatingOut, function(animatingOut) {
-        if (animatingOut) {
-          if (animation) $animate.cancel(animation);
-          elem.removeClass('in');
-          animation = $animate.addClass(elem, 'visible animating fade out').then(function() {
-            if (controller.is.animatingOut())
-              controller.remove.visible();
-            elem.removeClass('animating fade out');
-          }).finally(function() {
-
-          });
-        }
-      });
-
-
     }
   };
 });

@@ -151,7 +151,7 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
     $compile($dimmer)($scope);
     dimmerController = $dimmer.controller('dimmer');
     $body.append($dimmer);
-    $dimmer.controller('dimmer').set.dimmable($body);
+    $dimmer.controller('dimmer').setDimmable($body);
 
     $dimmer.bind('click', function(e) {
       if (e.target === e.currentTarget) {
@@ -173,7 +173,7 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
   };
 
   function isDimmerVisible() {
-    return dimmerController ? dimmerController.is.visible() : false;
+    return dimmerController ? dimmerController.isvisible() : false;
   };
 
   function refresh() {
@@ -193,7 +193,7 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
   };
 
   $scope.$watch(function() {
-    return visible && active && dimmerController && dimmerController.is.active();
+    return visible && active && dimmerController && dimmerController.isActive();
   }, function(shown) {
     if (deferredShow) deferredShow.resolve($element);
     deferredShow = null;

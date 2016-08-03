@@ -6,53 +6,36 @@
  *
  * The controller used in `dimmable` directive. Use it to
  * control the behaviour of the dimmer inside the dimmable.
- * 
+ *
  */
 angular.module('ui.dimmer').controller('DimmableController', function($element, $scope, $compile, $q) {
 
   var vm = this;
-  var visible = false;
-  var active = false;
-  var animatingIn, animatingOut = false;
-
   var $dimmer, dimmerController;
 
   vm.show = show;
   vm.hide = hide;
 
-  vm.is = {
-    active: isActive,
-    visible: isVisible,
-    animating: isAnimating,
-    animatingIn: isAnimatingIn,
-    animatingOut: isAnimatingOut
-  };
+  vm.setVisible = setVisible;
+  vm.removeVisible = removeVisible;
+  vm.isVisible = isVisible;
 
-  vm.get = {
-    dimmable: getDimmable,
-    dimmer: getDimmer
-  };
+  vm.setActive = setActive;
+  vm.removeActive = removeActive;
+  vm.isActive = isActive;
 
-  vm.set = {
-    visible: setVisible,
-    active: setActive,
-    dimmer: setDimmer
-  };
+  vm.isAnimating = isAnimating;
+  vm.isAnimatingIn = isAnimatingIn;
+  vm.isAnimatingOut = isAnimatingOut;
 
-  vm.remove = {
-    visible: removeVisible,
-    active: removeActive
-  };
+  vm.setDimmer = setDimmer;
+  vm.getDimmable = getDimmable;
+  vm.getDimmer = getDimmer;
 
-  vm.has = {
-    dimmer: hasDimmer
-  };
+  vm.setDimmer = setDimmer;
+  vm.hasDimmer = hasDimmer;
 
   vm.create = create;
-
-  vm.$postLink = function() {
-    if (!vm.has.dimmer()) vm.create();
-  };
 
   function getDimmable() {
     return $element;
@@ -71,59 +54,60 @@ angular.module('ui.dimmer').controller('DimmableController', function($element, 
   };
 
   function isActive() {
-    return dimmerController.is.active();
+    return dimmerController.isActive();
   };
 
   function isAnimating() {
-    return dimmerController.is.animating();
+    return dimmerController.isAnimating();
   };
 
   function isAnimatingIn() {
-    return dimmerController.is.animatingIn();
+    return dimmerController.isAnimatingIn();
   };
 
   function isAnimatingOut() {
-    return dimmerController.is.animatingOut();
+    return dimmerController.isAnimatingOut();
   };
 
   function isVisible() {
-    return dimmerController.is.visible();
+    return dimmerController.isVisible();
   };
 
   function setActive() {
-    return dimmerController.set.active();
+    return dimmerController.setActive();
   };
 
   function setDimmer(dimmer) {
     $dimmer = angular.element(dimmer);
+    dimmerController = $dimmer.controller('dimmer');
   };
 
   /**
    * @ngdoc method
-   * @name ui.dimmer.DimmableController#set.visible
+   * @name ui.dimmer.DimmableController#setVisible
    *
    * @description
    * Makes the dimmer in the dimmable visible.
    *
    */
   function setVisible() {
-    return dimmerController.set.visible();
+    return dimmerController.setVisible();
   };
 
   /**
    * @ngdoc method
-   * @name ui.dimmer.DimmableController#remove.visible
+   * @name ui.dimmer.DimmableController#removeVisible
    *
    * @description
    * Makes the dimmer in the dimmable hidden.
    *
    */
   function removeVisible() {
-    return dimmerController.remove.visible();
+    return dimmerController.removeVisible();
   };
 
   function removeActive() {
-    return dimmerController.remove.active();
+    return dimmerController.removeActive();
   };
 
   function show() {
@@ -135,9 +119,10 @@ angular.module('ui.dimmer').controller('DimmableController', function($element, 
     $element.append($dimmer);
     $compile($dimmer)($scope);
     dimmerController = $dimmer.controller('dimmer');
-    dimmerController.set.dimmable($element);
+    dimmerController.setDimmable($element);
   };
 
+  create();
 
 
 });

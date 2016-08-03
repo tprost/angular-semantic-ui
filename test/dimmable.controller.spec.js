@@ -1,36 +1,29 @@
 describe("ui.modal", function() {
 
-  // beforeEach(function() {
-  //   var testApp;
-  //   testApp = angular.module("test", ["ui.modal", "ngAnimateMock"]).controller("TestCtrl", function($scope, data) {
-  //     this.ctrlAsData = data;
-  //     return $scope.ctrlData = data;
-  //   });
-  //   return angular.mock.module("test");
-  // });
+  describe("DimmableController", function() {
 
-  describe("DimmerController", function() {
-
-    var $scope, $controller, $element, controller;
+    var $scope, $controller, $element, $compile, controller;
 
     beforeEach(module('ui.dimmer'));
 
-    beforeEach(inject(function($rootScope, _$controller_) {
+    beforeEach(inject(function($rootScope, _$controller_, _$compile_) {
       $scope = $rootScope.$new();
       $controller = _$controller_;
+      $compile = _$compile_;
     }));
 
     describe("the starting state", function() {
-      it("should be based on the classes applied to $element", function() {
+      it("should be based on the classes applied to the dimmer", function() {
         var variations = ["visible active", "active", "visible", ""];
         angular.forEach(variations, function(variation) {
-          $element = angular.element('<div class="ui dimmer"></div>');
-          $element.addClass(variation);
-          controller = $controller('DimmerController', {
-            $scope: $scope,
-            $element: $element
-          });
-          expect(controller.isVisible())
+          $element = angular.element('<div class="ui dimmable"></div>');
+          var $dimmer = angular.element('<div class="ui dimmer"></div>');
+          $element.append($dimmer);
+          $dimmer.addClass(variation);
+          $compile($element)($scope);
+          controller = $element.controller('dimmable');
+          controller.setDimmer($dimmer);
+          expect(controller.isActive())
             .toEqual(variation != "");
           expect(controller.isVisible())
             .toEqual(variation != "");
@@ -41,11 +34,15 @@ describe("ui.modal", function() {
     describe("set, remove, show and hide functions", function() {
       var controller;
       beforeEach(function() {
-        $element = angular.element('<div class="ui dimmer"></div>');
-        controller = $controller('DimmerController', {
+        $element = angular.element('<div class="ui dimmable"></div>');
+        var $dimmer = angular.element('<div class="ui dimmer"></div>');
+        //        $element.append($dimmer);
+        $compile($dimmer)($scope);
+        controller = $controller('DimmableController', {
           $scope: $scope,
           $element: $element
         });
+        controller.setDimmer($dimmer);
       });
 
       it("for active state", function() {

@@ -16,31 +16,23 @@ angular.module('ui.dimmer').controller('DimmerController', function($scope, $ele
   var deferredShow, deferredHide;
   var $dimmable;
 
-  vm.set = {
-    visible: setVisible,
-    active: setActive,
-    dimmable: setDimmable
-  };
+  vm.setVisible = setVisible;
+  vm.removeVisible = removeVisible;
+  vm.isVisible = isVisible;
 
-  vm.remove = {
-    visible: removeVisible,
-    active: removeActive
-  };
+  vm.setActive = setActive;
+  vm.removeActive = removeActive;
+  vm.isActive = isActive;
 
-  vm.get = {
-    dimmable: getDimmable
-  };
+  vm.setDimmable = setDimmable;
+  vm.getDimmable = getDimmable;
 
   vm.hide = hide;
   vm.show = show;
 
-  vm.is = {
-    visible: isVisible,
-    active: isActive,
-    animating: isAnimating,
-    animatingIn: isAnimatingIn,
-    animatingOut: isAnimatingOut
-  };
+  vm.isAnimating = isAnimating;
+  vm.isAnimatingOut = isAnimatingOut;
+  vm.isAnimatingIn = isAnimatingIn;
 
   function setDimmable(dimmable) {
     $dimmable = angular.element(dimmable);
@@ -130,43 +122,40 @@ angular.module('ui.dimmer').controller('DimmerController', function($scope, $ele
     visible = true;
   };
 
-
   function setActive() {
     animatingIn = false;
     animatingOut = false;
     visible = true;
     active = true;
+    finishedAnimatingIn();
   };
 
   function removeVisible() {
     animatingOut = false;
     animatingIn = false;
     visible = false;
+    finishedAnimatingOut();
   };
 
   function removeActive() {
     active = false;
   };
- 
-  active = $element.hasClass('active') || $element.hasClass('visible');
-  visible = active;
 
-  $scope.$watch(function() {
-    return visible && active;
-  }, function(shown) {
-    if (shown) {
-      if (deferredShow) deferredShow.resolve($element);
+  function finishedAnimatingIn() {
+    if (deferredShow) {
+      deferredShow.resolve($element);
       deferredShow = null;
     }
-  });
+  };
 
-  $scope.$watch(function() {
-    return !visible && !active;
-  }, function(hidden) {
-    if (hidden) {
-      if (deferredHide) deferredHide.resolve($element);
+  function finishedAnimatingOut() {
+    if (deferredHide) {
+      deferredHide.resolve($element);
       deferredHide = null;
     }
-  });
+  };
+
+  active = $element.hasClass('active') || $element.hasClass('visible');
+  visible = active;
 
 });
