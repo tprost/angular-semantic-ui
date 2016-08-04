@@ -11,8 +11,14 @@
 
     <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.css">
     <link rel="stylesheet" type="text/css" href="/demos/demos.css">
+    <link rel="stylesheet" type="text/css" href="/bower_components/highlightjs/styles/default.css">
 
   </head>
+
+  {% macro code(path, language='javascript') %}
+    <pre><code class="{{language}}">{% include path %}</code></pre>
+  {% endmacro %}
+
   <body ng-app="demo">
     <nav class="ui sidebar inverted vertical menu visible">
       <div class="item">
@@ -44,6 +50,8 @@
 
     {% endfor %}
     <script src="/demos/demo.js"></script>
+    <script src="/bower_components/highlightjs/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
     {% endblock %}
 
 

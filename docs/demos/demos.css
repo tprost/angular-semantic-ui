@@ -15,3 +15,7 @@
 article.module .ui.tabs.menu {
   margin-bottom: 5rem;
 }
+
+pre {
+  margin: 0;
+}

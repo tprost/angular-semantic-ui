@@ -53,15 +53,7 @@
         A modal can be created by simply have the modal exist on the page when Angular bootstraps.
       </div>
       <button id="example-modal-standard-show-button" type="button" class="ui black pointing below ignored label">Run Code</button>
-      <div class="ui existing segment">
-        <pre>
-          <code class="code javascript">
-angular.element(document.querySelector('.ui.modal'))
-.controller('modal').show();;
-          </code>
-        </pre>
-      </div>
-
+      {{ code('modal/snippets/inline-modal.js') }}
     </article>
     <article class="example">
       <h2 class="ui header">On-The-Fly Modal</h2>
@@ -70,13 +62,7 @@ angular.element(document.querySelector('.ui.modal'))
         A modal can be created by simply have the modal exist on the page when Angular bootstraps.
       </div>
       <button id="example-modal-dynamic-show-button" type="button" class="ui black pointing below ignored label murder">Run Code</button>
-      <div class="ui existing segment">
-        <pre>
-          <code class="code javascript">
-modalService.openModal();
-          </code>
-        </pre>
-      </div>
+      {{ code('modal/snippets/on-the-fly.js') }}
     </article>
   </section>
 
@@ -87,16 +73,7 @@ modalService.openModal();
 
   <section class="ui tab" data-tab="settings">
     <p>You can modify the default settings with a provider probably maybe.</p>
-    <div class="ui existing segment">
-      <pre>
-        <code class="code javascript">
-var myApp = angular.module("myApp", ["ui.modal"]);
-myApp.config(function(modalSettingsProvider) {
-  modalSettingsProvider.defaults.centerUsingMarginTop = false;
-});
-        </code>
-      </pre>
-    </div>
+    {{ code('modal/snippets/provider.js') }}
   </section>
 
 </article>

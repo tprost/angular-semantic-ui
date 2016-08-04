@@ -19,6 +19,7 @@
   "dependencies": {
     "angular": "~1.5.8",
     "angular-animate": "~1.5.8",
-    "angular-mocks": "~1.5.8"
+    "angular-mocks": "~1.5.8",
+    "highlightjs": "~9.5.0"
   }
 }
