@@ -187,6 +187,7 @@ angular.module('ui.modal').provider('modalService', function() {
 
               if (_this.container.controller('modal')) {
                 return _this.container.controller('modal').hide().then(function() {
+
                   currentModal = null;
                   if (!_this.options.scope) {
                     _this.scope.$destroy();

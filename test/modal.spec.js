@@ -494,7 +494,7 @@
             for (i = 1; i <= 5; i++) {
 
             }
-              this.$animate.flush();
+            this.$animate.flush();
             expect(openedModal).toEqual("modal3");
             return expect(closedModal).toEqual("modal2");
           });
@@ -507,11 +507,17 @@
           });
           return this.$animate.flush();
         });
-        it("removes the element from the body", function() {
+        xit("removes the element from the body", function(done) {
           this.modalService.closeCurrentModal();
-          this.$animate.flush();
           this.$rootScope.$digest();
-          return expect(this.modal.element).not.toBeInDOM();
+
+          var $modal = this.modal.element;
+          $modal.controller('modal').hide().then(function() {
+            expect($modal[0]).not.toBeInDOM();
+            $modal.scope().$digest();
+            done();
+          });
+          this.$animate.flush();
         });
         it("removes the class from the body indicating that the modal is open", function() {
           expect(angular.element("body").hasClass("dimmable")).toBe(true);

@@ -1,13 +1,4 @@
-describe("ui.modal", function() {
-
-  // beforeEach(function() {
-  //   var testApp;
-  //   testApp = angular.module("test", ["ui.modal", "ngAnimateMock"]).controller("TestCtrl", function($scope, data) {
-  //     this.ctrlAsData = data;
-  //     return $scope.ctrlData = data;
-  //   });
-  //   return angular.mock.module("test");
-  // });
+describe("ui.dimmer", function() {
 
   describe("DimmerController", function() {
 

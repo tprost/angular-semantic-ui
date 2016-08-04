@@ -6,53 +6,43 @@
  * The controller for the `modal` directive.
  *
  **/
-angular.module('ui.modal').controller('ModalController', function($document, $element, $scope, $q, modalSettings) {
+angular.module('ui.modal').controller('ModalController', function($document, $element, $q, modalSettings) {
 
   var vm = this;
   var active, visible, animatingIn, animatingOut;
-  var $parent;
+  var $parent = null;
+  var $dimmer, dimmerController;
+  var deferredShow, deferredHide;
+
+  active = false;
+  visible = false;
+  animatingIn = false;
+  animatingOut = false;
 
   vm.settings = angular.copy(modalSettings.defaults);
 
-  vm.is = {
-    active: isActive,
-    visible: isVisible,
-    animating: isAnimating,
-    animatingIn: isAnimatingIn,
-    animatingOut: isAnimatingOut
-  };
+  vm.isActive = isActive;
+  vm.isVisible = isVisible;
+  vm.isAnimating = isAnimating;
+  vm.isAnimatingIn = isAnimatingIn;
+  vm.isAnimatingOut = isAnimatingOut;
 
-  vm.set = {
-    active: setActive
-  };
+  vm.setActive = setActive;
+  vm.setVisible = setVisible;
+  vm.setParent = setParent;
 
-  vm.remove = {
-    visible: removeVisible,
-    dimmer: removeDimmer
-  };
+  vm.removeActive = removeActive;
+  vm.removeVisible = removeVisible;
+  vm.removeDimmer = removeDimmer;
 
   vm.hide = hide;
   vm.show = show;
   vm.toggle = toggle;
 
-  vm.refresh = refresh;
+  vm.getParent = getParent;
+  vm.getModal = getModal;
 
-  vm.get = {
-    parent: getParent,
-    modal: getModal
-  };
-
-  vm.has = {
-    parent: hasParent
-  };
-
-  var $dimmer, dimmerController;
-
-  vm.settings = {
-
-  };
-
-  var deferredShow, deferredHide;
+  vm.hasParent = hasParent;
 
   /**
    * @ngdoc function
@@ -128,47 +118,33 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
     animatingOut = false;
     visible = true;
     active = true;
+    resolveShowPromise();
   };
 
   function removeVisible() {
     animatingOut = false;
     animatingIn = false;
     visible = false;
+    resolveHidePromise();
   };
 
   function removeActive() {
     active = false;
   };
 
-  function refresh() {
-
+  function resolveShowPromise() {
+    if (deferredShow) {
+      deferredShow.resolve($element);
+      deferredShow = null;
+    }
   };
 
-
-  active = $element.hasClass('active');
-  visible = $element.hasClass('visible');
-  // original parent of the modal
-  $parent = $element.parent() ? angular.element($element.parent()) : null;
-
-  $element.addClass('transition');
-
-  this.$doCheck = function() {
-
+  function resolveHidePromise() {
+    if (deferredHide) {
+      deferredHide.resolve($element);
+      deferredHide = null;
+    }
   };
-
-  $scope.$watch(function() {
-    return visible && active && dimmerController && dimmerController.isActive();
-  }, function(shown) {
-    if (deferredShow) deferredShow.resolve($element);
-    deferredShow = null;
-  });
-
-  $scope.$watch(function() {
-    return !visible && !active;
-  }, function(shown) {
-    if (deferredHide) deferredHide.resolve($element);
-    deferredHide = null;
-  });
 
   function hasParent() {
     return angular.isElement($parent);
@@ -180,6 +156,10 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
 
   function getParent() {
     return $parent;
+  };
+
+  function setParent(parent) {
+    $parent = angular.element(parent);
   };
 
   function removeDimmer() {

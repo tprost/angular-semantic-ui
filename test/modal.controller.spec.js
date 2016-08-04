@@ -1,10 +1,11 @@
-describe("ui.dimmer", function() {
+describe("ui.modal", function() {
 
-  describe("DimmableController", function() {
+  describe("ModalController", function() {
 
-    var $scope, $controller, $element, $compile, controller;
+    var $scope, $element, controller;
+    var $compile, $controller;
 
-    beforeEach(module('ui.dimmer'));
+    beforeEach(module('ui.modal'));
 
     beforeEach(inject(function($rootScope, _$controller_, _$compile_) {
       $scope = $rootScope.$new();
@@ -12,37 +13,15 @@ describe("ui.dimmer", function() {
       $compile = _$compile_;
     }));
 
-    describe("the starting state", function() {
-      it("should be based on the classes applied to the dimmer", function() {
-        var variations = ["visible active", "active", "visible", ""];
-        angular.forEach(variations, function(variation) {
-          $element = angular.element('<div class="ui dimmable"></div>');
-          var $dimmer = angular.element('<div class="ui dimmer"></div>');
-          $element.append($dimmer);
-          $dimmer.addClass(variation);
-          $compile($element)($scope);
-          controller = $element.controller('dimmable');
-          controller.setDimmer($dimmer);
-          expect(controller.isActive())
-            .toEqual(variation != "");
-          expect(controller.isVisible())
-            .toEqual(variation != "");
-        });
-      });
-    });
-
     describe("set, remove, show and hide functions", function() {
+
       var controller;
+
       beforeEach(function() {
-        $element = angular.element('<div class="ui dimmable"></div>');
-        var $dimmer = angular.element('<div class="ui dimmer"></div>');
-        //        $element.append($dimmer);
-        $compile($dimmer)($scope);
-        controller = $controller('DimmableController', {
-          $scope: $scope,
-          $element: $element
-        });
-        controller.setDimmer($dimmer);
+        $element = angular.element('<div class="ui modal"></div>');
+        $element.append(angular.element('<p>A paragraph.</p>'));
+        $compile($element)($scope);
+        controller = $element.controller('modal');
       });
 
       it("for active state", function() {
