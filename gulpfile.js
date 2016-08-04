@@ -40,7 +40,7 @@ gulp.task('docs:demos:dgeni', function() {
 });
 
 gulp.task('docs:demos:nunjucks', ['docs:demos:dgeni'], function() {
-  gulp.src('docs/demos/*.html')
+  gulp.src('docs/demos/**/!(_)*.html')
     .pipe(nunjucks.compile(demoData()))
     .pipe(gulp.dest('dist/demos'));
 });

@@ -1,4 +1,4 @@
-{% extends './_base.html' %}
+{% extends '_base.html' %}
 
 {% block content %}
 <article class="module">
@@ -87,6 +87,16 @@ modalService.openModal();
 
   <section class="ui tab" data-tab="settings">
     <p>You can modify the default settings with a provider probably maybe.</p>
+    <div class="ui existing segment">
+      <pre>
+        <code class="code javascript">
+var myApp = angular.module("myApp", ["ui.modal"]);
+myApp.config(function(modalSettingsProvider) {
+  modalSettingsProvider.defaults.centerUsingMarginTop = false;
+});
+        </code>
+      </pre>
+    </div>
   </section>
 
 </article>
