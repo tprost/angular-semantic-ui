@@ -22,14 +22,8 @@
     <article class="example" id="example-dimmer-basic">
       <h2 class="ui header">Simple Dimmer</h2>
       <p>A simple dimmer displays no content.</p>
-      <div class="ui existing segment">
-        <pre>
-          <code class="code javascript">
-angular.element(document.querySelector('.dimmer')).controller('dimmer').show();
-angular.element(document.querySelector('.dimmer')).controller('dimmer').hide();
-          </code>
-        </pre>
-      </div>
+      {{ code('dimmer/snippets/simple-dimmer.js') }}
+
       <div class="ui ignored info message">A dimmer will automatically be created when a dimming behavior is triggered on an element.
       </div>
       <div class="ui segment dimmable">
