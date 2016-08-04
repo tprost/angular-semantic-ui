@@ -1,3 +1,12 @@
+/**
+ * @ngdoc service
+ * @name modalService
+ *
+ *
+ * @description
+ * A service to help create modal windows on the fly.
+ */
+
 angular.module('ui.modal').provider('modalService', function() {
   var ModalProvider;
   return ModalProvider = {
@@ -223,7 +232,8 @@ angular.module('ui.modal').provider('modalService', function() {
       })();
       return {
         /**
-         * 
+         * @ngdoc method
+         * @name modalService#open
          * @param {object} options Options on how to create the modal.
          * * `template` - HTML template that will be compiled with the modal scope & controller, then inserted into the modal container
          * * `templateUrl` - URL to GET the HTML template that will be compiled with the modal scope & controller, then inserted into the modal container. This is overriden by template

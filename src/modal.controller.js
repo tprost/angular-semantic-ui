@@ -45,12 +45,14 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
   vm.hasParent = hasParent;
 
   /**
-   * @ngdoc function
+   * @ngdoc method
    * @name ui.modal.ModalController#show
    *
-   *
    * @description
-   * Show the modal.
+   * Animate the modal in.
+   * @returns {Promise} `Promise` that resolves when the modal
+   * finishes animating in.
+   *
    */
   function show() {
     visible = true;
@@ -62,11 +64,14 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
   };
 
   /**
-   * @ngdoc function
+   * @ngdoc method
    * @name ui.modal.ModalController#hide
    *
    * @description
-   * Hide the modal.
+   * Animate the modal out.
+   * @returns {Promise} `Promise` that resolves when the modal
+   * finishes animating out.
+   *
    */
   function hide() {
     active = false;
@@ -77,6 +82,13 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
     return deferredHide.promise;
   };
 
+  /**
+   * @ngdoc method
+   * @name ui.modal.ModalController#toggle
+   *
+   * @description
+   * If the modal is active, call `hide()`, otherwise call `show()`.
+   */
   function toggle() {
     vm.is.active() ? vm.hide() : vm.show();
   };

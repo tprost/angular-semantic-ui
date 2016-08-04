@@ -31,6 +31,9 @@ module.exports = new Package('dgeni-example', [
   };
 
   templateFinder.templateFolders
+      .unshift(path.resolve(__dirname, 'dgeni/templates'));
+
+  templateFinder.templateFolders
       .unshift(path.resolve(__dirname, '../../node_modules/dgeni-packages/ngdoc/templates/api'));
 
   templateFinder.templatePatterns = [
