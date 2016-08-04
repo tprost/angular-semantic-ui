@@ -2,6 +2,14 @@ Angular module for creating or manipulating modals. It uses `semantic-ui` HTML m
 
 Let's use this style guide: https://github.com/johnpapa/angular-styleguide/tree/master/a1
 
+## Development
+
+1. Clone this repository.
+2. Run `npm install`.
+3. Run `npm run docs` to build the documentation.
+4. Run `gulp serve` to serve the documentation.
+5. Run `gulp watch` to watch stuff and develop more easily.
+
 ## Dimmer
 
 ### TODO

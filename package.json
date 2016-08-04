@@ -5,15 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "coffee --compile karma.conf.coffee",
-    "docs": "grunt ngdocs",
+    "postinstall": "npm run build",
+    "docs": "gulp docs",
     "build:semantic": "cd semantic && gulp build",
-    "build": "bower install && gulp build && npm run build:semantic"
+    "build": "bower install && npm run build:semantic && gulp build"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "angular-popeye": "^1.0.5",
     "better-console": "^0.2.4",
     "canonical-path": "0.0.2",

@@ -49,7 +49,7 @@ gulp.task('docs:demos', [
   'docs:demos:static',
   'docs:demos:nunjucks']);
 
-gulp.task('docs', ['docs:api', 'docs:demos'], function() {
+gulp.task('docs', ['docs:demos'], function() {
 
 });
 
