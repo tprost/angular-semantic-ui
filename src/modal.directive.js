@@ -41,7 +41,7 @@ angular.module('ui.modal').directive('modal', function($document, $animate, $com
         var dimmerController = $dimmer.controller('dimmer');
         dimmerController.setDimmable($body);
         $dimmer.bind('click', function(e) {
-          if (e.target === e.currentTarget) {
+          if (e.target === e.currentTarget && ctrl.settings.closable) {
             scope.$apply(ctrl.hide);
           }
         });
