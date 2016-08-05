@@ -12,23 +12,18 @@ Let's use this style guide: https://github.com/johnpapa/angular-styleguide/tree/
 
 ## Dimmer
 
-### TODO
-
-write controller for `dimmable`
+* complete documentation
 
 ## Modal
 
 ### TODO
 
-* `onDeny` and `onApprove` callbacks with corresponding buttons
-* make modal created with `modalService` not break if you use its controller
+* make `show()` return a Promise that resolves the moment the modal is closed and has details on whether it was closed, approved or denied
+* make `hide()` return a Promise that resolves when the modal has finished animating out, and is rejected if the modal is not a `closable` modal
+* make `approve()` and `deny()`
+* make Promises available for when the modal becomes visible or hidden, etc.
 * more tests
-* option to use margins to center modal (on by default)
-* modal settings
+* try out practical scenario with a form in a modal
 * DOM settings
-* callbacks maybe
-
-
-
-
-
+* close/approve/deny buttons
+* complete documentation
