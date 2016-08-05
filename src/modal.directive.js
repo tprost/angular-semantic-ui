@@ -71,11 +71,9 @@ angular.module('ui.modal').directive('modal', function($document, $animate, $com
         }
       });
 
-
-
       scope.$watch(ctrl.isAnimatingOut, function(animatingOut) {
         if (animatingOut) {
-          $dimmer.controller('dimmer').hide();
+          if ($dimmer) $dimmer.controller('dimmer').hide();
           if (animation) $animate.cancel(animation);
           elem.removeClass('in');
           animation = $animate.addClass(elem, 'visible animating scale out').then(function() {

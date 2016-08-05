@@ -12,7 +12,20 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
   var active, visible, animatingIn, animatingOut;
   var $parent = null;
   var $dimmer, dimmerController;
-  var deferredShow, deferredHide;
+
+  // resolved when the modal and dimmer are both hidden
+  var deferredHidden;
+
+  // resolved when the modal becomes visible (when it starts animating in)
+  //   Note that Semantic UI isn't always consistent with whether
+  //   something that is animating in is `visible` or not.
+  var deferredVisible;
+
+  // resolved when the modal is active (animated in)
+  var deferredActive;
+
+  // resolved when the modal is closed, approved or denied
+  var deferredResolution;
 
   active = false;
   visible = false;
@@ -36,8 +49,13 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
   vm.removeDimmer = removeDimmer;
 
   vm.hide = hide;
+  vm.close = hide;
+
   vm.show = show;
+
   vm.toggle = toggle;
+  vm.approve = approve;
+  vm.deny = deny;
 
   vm.getParent = getParent;
   vm.getModal = getModal;
@@ -51,16 +69,17 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
    * @description
    * Animate the modal in.
    * @returns {Promise} `Promise` that resolves when the modal
-   * finishes animating in.
+   * gets closed for whatever reason. The result of the promise
+   * will be an object with attribute `resolution` set to either
+   * `approved`, `denied` or `closed`.
    *
    */
   function show() {
     visible = true;
     if (!active) animatingIn = true;
     animatingOut = false;
-    if (deferredShow) return deferredShow.promise;
-    deferredShow = $q.defer();
-    return deferredShow.promise;
+    deferredResolution = $q.defer();
+    return deferredResolution.promise;
   };
 
   /**
@@ -77,9 +96,45 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
     active = false;
     animatingIn = false;
     if (visible) animatingOut = true;
-    if (deferredHide) return deferredHide.promise;
-    deferredHide = $q.defer();
-    return deferredHide.promise;
+    if (deferredResolution) deferredResolution.resolve({
+      resolution: 'closed'
+    });
+    deferredHidden = $q.defer();
+    return deferredHidden.promise;
+  };
+
+  /**
+   * @ngdoc method
+   * @name ui.modal.ModalController#approve
+   *
+   * @description
+   * Hides the modal and resolves the modal as `approved`.
+   * @returns {Promise} `Promise` that resolves when the modal
+   * finishes animating out.
+   *
+   */
+  function approve() {
+    deferredResolution.resolve({
+      resolution: 'approved'
+    });
+    return hide();
+  };
+
+  /**
+   * @ngdoc method
+   * @name ui.modal.ModalController#deny
+   *
+   * @description
+   * Hides the modal and resolves the modal as `denied`.
+   * @returns {Promise} `Promise` that resolves when the modal
+   * finishes animating out.
+   *
+   */
+  function deny() {
+    deferredResolution.resolve({
+      resolution: 'denied'
+    });
+    return hide();
   };
 
   /**
@@ -130,32 +185,19 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
     animatingOut = false;
     visible = true;
     active = true;
-    resolveShowPromise();
+    if (deferredResolution) deferredResolution.notify(vm);
+    if (deferredActive) deferredActive.resolve();
   };
 
   function removeVisible() {
     animatingOut = false;
     animatingIn = false;
     visible = false;
-    resolveHidePromise();
+    if (deferredHidden) deferredHidden.resolve();
   };
 
   function removeActive() {
     active = false;
-  };
-
-  function resolveShowPromise() {
-    if (deferredShow) {
-      deferredShow.resolve($element);
-      deferredShow = null;
-    }
-  };
-
-  function resolveHidePromise() {
-    if (deferredHide) {
-      deferredHide.resolve($element);
-      deferredHide = null;
-    }
   };
 
   function hasParent() {

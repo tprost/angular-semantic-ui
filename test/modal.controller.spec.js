@@ -13,6 +13,61 @@ describe("ui.modal", function() {
       $compile = _$compile_;
     }));
 
+    describe("show, hide, approve and deny", function() {
+
+
+
+    });
+
+    describe("show function", function() {
+
+
+      var controller;
+
+      beforeEach(function() {
+        $element = angular.element('<div class="ui modal"></div>');
+        $element.append(angular.element('<p>A paragraph.</p>'));
+        $compile($element)($scope);
+        controller = $element.controller('modal');
+      });
+
+      describe("Promise returned", function() {
+
+        it("should resolve as approved when the modal is approved", function(done) {
+          controller.show().then(function(result) {
+            expect(result.resolution).toEqual("approved");
+            done();
+          });
+          controller.approve();
+          controller.removeVisible();
+          $scope.$digest();
+        });
+
+        it("should resolve as denied when the modal is denied", function(done) {
+          controller.show().then(function(result) {
+            expect(result.resolution).toEqual("denied");
+            done();
+          });
+          controller.deny();
+          controller.removeVisible();
+          $scope.$digest();
+        });
+
+        it("should notify when the modal becomes visible", function(done) {
+          controller.show().then(function() {
+
+          }, function() {
+
+          }, function() {
+            done();
+          });
+          controller.setVisible();
+          controller.setActive();
+          $scope.$digest();
+        });
+      });
+    });
+
     describe("set, remove, show and hide functions", function() {
 
       var controller;
@@ -56,16 +111,6 @@ describe("ui.modal", function() {
           expect(controller.isActive()).toEqual(true);
         });
 
-        it("should return a Promise", function() {
-          var callbackHasBeenCalled = false;
-          controller.show().then(function() {
-            callbackHasBeenCalled = true;
-          });
-          expect(callbackHasBeenCalled).toEqual(false);
-          controller.setActive();
-          $scope.$digest();
-          expect(callbackHasBeenCalled).toEqual(true);
-        });
       });
 
       describe("hide", function() {

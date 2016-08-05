@@ -159,10 +159,17 @@ angular.module('ui.modal').provider('modalService', function() {
                     }
                     if (_this.container.controller('modal')) {
                       _this.container.controller('modal').show().then(function() {
+
+                      }, function() {
+                        // error callback
+                      }, function() {
+
+                      });
                         currentModal = _this;
                         return _this.openedDeferred.resolve(_this);
-                      });
                     }
+
+
                     // return $animate.enter(_this.container, body, bodyLastChild, {
                     //   addClass: 'animating fade in'
                     // }).then(function() {
