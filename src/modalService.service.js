@@ -157,16 +157,18 @@ angular.module('ui.modal').provider('modalService', function() {
                     if (_this.options.bodyClass) {
                       body.addClass(_this.options.bodyClass);
                     }
-                    if (_this.container.controller('modal')) {
-                      _this.container.controller('modal').show().then(function() {
+                    var controller = _this.container.controller('modal');
+                    if (controller) {
+                      angular.extend(controller.settings, _this.options.settings);
+                        controller.show().then(function() {
 
-                      }, function() {
-                        // error callback
-                      }, function() {
+                        }, function() {
+                          // error callback
+                        }, function() {
 
-                      });
-                        currentModal = _this;
-                        return _this.openedDeferred.resolve(_this);
+                        });
+                      currentModal = _this;
+                      return _this.openedDeferred.resolve(_this);
                     }
 
 

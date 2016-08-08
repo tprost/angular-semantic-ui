@@ -29,7 +29,10 @@ angular.module('demo').directive('murder', function($compile, modalService) {
             '<p>Paragraph.</p>' +
             '<p>Paragraph.</p>' +
             '<p>Paragraph.</p>' +
-            '</div>'
+            '</div>',
+          settings: {
+            addClass: 'a-custom-class'
+          }
         });
       });
     }

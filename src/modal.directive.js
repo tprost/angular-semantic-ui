@@ -11,6 +11,13 @@ angular.module('ui.modal').directive('modal', function($document, $animate, $com
       if (elem.parent()) ctrl.setParent(elem.parent());
       elem.addClass('transition');
 
+      scope.$watch(function() {
+        return ctrl.settings.addClass;
+      }, function(classes, oldClasses) {
+        elem.removeClass(oldClasses);
+        elem.addClass(classes);
+      });
+
       scope.$watch(ctrl.isActive, function(active, wasActive) {
         elem.toggleClass('active', active);
         angular.element($document.find('body')).toggleClass('dimmed', active);
