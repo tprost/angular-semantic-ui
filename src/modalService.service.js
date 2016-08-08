@@ -35,6 +35,13 @@ angular.module('ui.modal').provider('modalService', function() {
         }
         return null;
       });
+
+        /**
+         * @ngdoc type
+         * @name Modal
+         * @description
+         * An object representing an on-the-fly modal.
+         */
       Modal = (function() {
         function Modal(options) {
           if (options == null) {
@@ -94,6 +101,12 @@ angular.module('ui.modal').provider('modalService', function() {
           return this.resolved;
         };
 
+        /**
+         * @ngdoc method
+         * @name Modal#open
+         * @description
+         * Opens the modal. Note that `modalService.openModal()` calls this for you.
+         */
         Modal.prototype.open = function() {
           var promise;
           if (this.opening) {
@@ -191,6 +204,13 @@ angular.module('ui.modal').provider('modalService', function() {
           return this.opened;
         };
 
+
+        /**
+         * @ngdoc method
+         * @name Modal#close
+         * @description
+         * Close the modal.
+         */
         Modal.prototype.close = function(value) {
           if (this.closing) {
             return this.closed;
@@ -242,13 +262,13 @@ angular.module('ui.modal').provider('modalService', function() {
       return {
         /**
          * @ngdoc method
-         * @name modalService#open
+         * @name modalService#openModal
          * @param {object} options Options on how to create the modal.
          * * `template` - HTML template that will be compiled with the modal scope & controller, then inserted into the modal container
          * * `templateUrl` - URL to GET the HTML template that will be compiled with the modal scope & controller, then inserted into the modal container. This is overriden by template
          * * `scope` - $scope to use for the modal template. By default, a new scope is created off of $rootScope. For convenience, a $close() function is added to the scope that can be used to close the modal.
          * * `controller` - $scope to use for the modal template. By default, a new scope is created off of $rootScope
-         * * `click` Whether or not clicking on the modal container element should close the current modal. Default is true.
+         * * `settings` - settings object for the modal (which will override the defaults in `modalSettings`
          */
         openModal: function(options) {
           var modal;
