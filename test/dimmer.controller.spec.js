@@ -3,13 +3,26 @@ describe("ui.dimmer", function() {
   describe("DimmerController", function() {
 
     var $scope, $controller, $element, controller;
+    var dimmerSettings;
 
     beforeEach(module('ui.dimmer'));
 
-    beforeEach(inject(function($rootScope, _$controller_) {
+    beforeEach(inject(function($rootScope, _$controller_, _dimmerSettings_) {
       $scope = $rootScope.$new();
       $controller = _$controller_;
+      dimmerSettings = _dimmerSettings_;
     }));
+
+    describe("settings", function() {
+      it("should use the settings from `dimmerSettings`", function() {
+        $element = angular.element('<div class="ui dimmer"></div>');
+        controller = $controller('DimmerController', {
+          $scope: $scope,
+          $element: $element
+        });
+        expect(controller.settings).toEqual(dimmerSettings.defaults);
+      });
+    });
 
     describe("the starting state", function() {
       it("should be based on the classes applied to $element", function() {
@@ -116,7 +129,5 @@ describe("ui.dimmer", function() {
     });
 
   });
-
-
 
 });

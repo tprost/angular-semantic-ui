@@ -7,7 +7,7 @@
  * control the behaviour of the dimmer.
  *
  **/
-angular.module('ui.dimmer').controller('DimmerController', function($scope, $element, $q) {
+angular.module('ui.dimmer').controller('DimmerController', function($scope, $element, $q, dimmerSettings) {
 
   $element.addClass('transition');
 
@@ -33,6 +33,8 @@ angular.module('ui.dimmer').controller('DimmerController', function($scope, $ele
   vm.isAnimating = isAnimating;
   vm.isAnimatingOut = isAnimatingOut;
   vm.isAnimatingIn = isAnimatingIn;
+
+  vm.settings = angular.copy(dimmerSettings.defaults);
 
   function setDimmable(dimmable) {
     $dimmable = angular.element(dimmable);

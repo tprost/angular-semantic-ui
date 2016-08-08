@@ -52,10 +52,11 @@ angular.module('ui.dimmer').directive('dimmer', function($controller, $animate, 
         scope.$watch(controller.isAnimatingIn, function(animatingIn) {
           if (animatingIn) {
             if (animation) $animate.cancel(animation);
-            animation = $animate.setClass(elem, 'visible animating fade in', 'out').then(function() {
+            animation = $animate.setClass(elem, 'visible animating in ' + controller.settings.transition, 'out').then(function() {
               if (controller.isAnimatingIn())
                 controller.setActive();
-              elem.removeClass('animating fade in');
+              elem.removeClass('animating in');
+              elem.removeClass(controller.settings.transition);
             });
           }
         });
@@ -64,10 +65,11 @@ angular.module('ui.dimmer').directive('dimmer', function($controller, $animate, 
           if (animatingOut) {
             if (animation) $animate.cancel(animation);
             elem.removeClass('in');
-            animation = $animate.addClass(elem, 'visible animating fade out').then(function() {
+            animation = $animate.addClass(elem, 'visible animating out ' + controller.settings.transition).then(function() {
               if (controller.isAnimatingOut())
                 controller.removeVisible();
-              elem.removeClass('animating fade out');
+              elem.removeClass('animating out');
+              elem.removeClass(controller.settings.transition);
             }).finally(function() {
 
             });

@@ -32,6 +32,7 @@ angular.module('ui.modal').controller('ModalController', function($document, $el
   animatingIn = false;
   animatingOut = false;
 
+
   vm.settings = angular.copy(modalSettings.defaults);
 
   vm.isActive = isActive;
