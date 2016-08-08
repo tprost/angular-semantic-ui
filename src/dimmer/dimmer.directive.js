@@ -1,6 +1,7 @@
 /**
  * @ngdoc directive
  * @name ui.dimmer.directive:dimmer
+ * @module ui.dimmer
  * @restrict C
  * @description
  * Dimmer directive.
