@@ -6,4 +6,4 @@
  *
  * AngularJS components for Semantic UI.
  */
-angular.module('ui', ['ui.modal', 'ui.dimmer']);
+angular.module('ui', ['ui.modal', 'ui.dimmer', 'ui.tab']);

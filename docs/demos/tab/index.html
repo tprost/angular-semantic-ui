@@ -1,0 +1,54 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<article class="module">
+  <header>
+    <h1 class="ui header">
+      <span>Tab</span>
+      <p class="sub header">
+        A tab is a hidden section of content activated by a menu.
+      </p>
+    </h1>
+  </header>
+
+  <div class="ui divider"></div>
+
+  <nav class="ui three item stackable tabs menu">
+    <a class="active item" data-tab="examples">Examples</a>
+    <a class="item" data-tab="usage">Usage</a>
+    <a class="item" data-tab="settings">Settings</a>
+  </nav>
+
+  <section class="ui tab active" data-tab="examples">
+    <article class="example">
+      <h2>Basic Tabs</h2>
+      <div class="ui top attached tabular menu">
+        <a class="item active" data-tab="first">First</a>
+        <a class="item" data-tab="second">Second</a>
+        <a class="item" data-tab="third">Third</a>
+      </div>
+      <div class="ui bottom attached tab segment active" data-tab="first">First </div>
+      <div class="ui bottom attached tab segment" data-tab="second">Second </div>
+      <div class="ui bottom attached tab segment" data-tab="third">Third </div>
+    </article>
+  </section>
+
+  <section class="ui tab" data-tab="usage">
+    {% include './dgeni/output/partials/api/ui.tab/type/ui.tab.TabController.html' %}
+    {% include './dgeni/output/partials/api/ui.tab/type/ui.tab.MenuController.html' %}
+  </section>
+
+  <section class="ui tab" data-tab="settings">
+    <p>You can modify the default settings with a provider probably maybe.</p>
+    {{ code('modal/snippets/provider.js') }}
+  </section>
+
+</article>
+{% endblock %}
+
+
+{% block js %}
+{{ super() }}
+<script src="./modal.js"></script>
+
+{% endblock %}
