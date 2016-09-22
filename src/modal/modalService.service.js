@@ -227,9 +227,9 @@ angular.module('ui.modal').provider('modalService', function() {
                 return _this.container.controller('modal').hide().then(function() {
 
                   currentModal = null;
-                  if (!_this.options.scope) {
-                    _this.scope.$destroy();
-                  }
+                  // if (!_this.options.scope) {
+                  //   _this.scope.$destroy();
+                  // }
                   //                $document.find("body").removeClass(_this.options.bodyClass);
                   return _this.closedDeferred.resolve(value);
                 });
