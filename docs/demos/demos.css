@@ -2,10 +2,9 @@
   width: 35px;
   margin-right: 1em;
 }
-.pusher {
-  margin-left: 15rem;
-  min-height: 100vh;
-  width: calc(100% - 15rem);
+body > .pusher > .ui.container {
+  width: auto;
+  margin: 0;
   padding: 5rem;
 }
 .example {

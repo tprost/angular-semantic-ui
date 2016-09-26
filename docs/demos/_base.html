@@ -16,11 +16,12 @@
   </head>
 
   {% macro code(path, language='javascript') %}
-    <pre><code class="{{language}}">{% include path %}</code></pre>
+  <pre><code class="{{language}}">{% include path %}</code></pre>
   {% endmacro %}
 
   <body ng-app="demo">
-    <nav class="ui sidebar inverted vertical menu visible">
+    {% block body %}
+    <nav class="ui sidebar inverted vertical menu visible left push">
       <div class="item">
         <a class="ui logo icon image">
           <img src="http://semantic-ui.com/images/logo.png">
@@ -37,15 +38,21 @@
       <a class="item" href="/demos/modal/">
         Modal
       </a>
+      <a class="item" href="/demos/sidebar/">
+        Sidebar
+      </a>
       <a class="item" href="/demos/tab/">
         Tab
       </a>
     </nav>
     <div class="pusher">
-      {% block content %}
-      <!-- content -->
-      {% endblock %}
+      <div class="ui container">
+        {% block content %}
+        <!-- content -->
+        {% endblock %}
+      </div>
     </div>
+    {% endblock body %}
 
     {% block js %}
     {% for script in js %}
@@ -60,4 +67,3 @@
 
   </body>
 </html>
-

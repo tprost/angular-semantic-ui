@@ -1,6 +1,13 @@
-var $dimmer = angular.element(document.querySelector('.dimmer'));
-$scope.$apply(function() {
-  $dimmer.toggle();
-  // $dimmer.show();
-  // $dimmer.hide();
+var $dimmable = angular.element(document.querySelector('.dimmable'));
+
+// show
+$dimmable.controller('dimmable').show().then(function() {
+  console.log("dimmable shown");
 });
+$dimmable.scope().$digest();
+
+// hide
+$dimmable.controller('dimmable').hide().then(function() {
+  console.log("dimmable hidden");
+});
+$dimmable.scope().$digest();
