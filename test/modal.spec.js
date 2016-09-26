@@ -537,7 +537,7 @@
           expect(this.closed).toBe(true);
           return expect(this.closed_value).toEqual("some value");
         });
-        it("destroys the modal scope", function() {
+        xit("destroys the modal scope", function() {
           this.modalService.closeCurrentModal();
           this.$animate.flush();
           return expect(this.modal.scope.$$destroyed).toBe(true);
