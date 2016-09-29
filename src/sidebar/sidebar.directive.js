@@ -21,6 +21,27 @@ angular.module('ui.sidebar').directive('sidebar', function($controller, $animate
 
       if (elem.hasClass('visible')) ctrl.setVisible();
 
+
+      var pusher = angular.element($document[0].querySelector('.pusher'));
+      var pusherClickHandler = function(e) {
+        if (ctrl.isVisible() && !ctrl.isAnimatingIn()) {
+          e.preventDefault();
+          ctrl.hide();
+          scope.$apply();
+        }
+      };
+      var pusherClickHandlerBound = false;
+
+      function bindPusherClickHandler() {
+        if (!pusherClickHandlerBound)
+          pusher.bind('click', pusherClickHandler);
+      };
+
+      function unbindPusherClickHandler() {
+        if (pusherClickHandlerBound)
+          pusher.unbind('click', pusherClickHandler);
+      };
+
       scope.$watch(ctrl.isVisible, function(visible) {
         if (!ctrl.isAnimatingIn() && visible) {
           elem.toggleClass('visible', visible);
@@ -28,6 +49,8 @@ angular.module('ui.sidebar').directive('sidebar', function($controller, $animate
         if (!ctrl.isAnimatingOut() && !visible) {
           elem.toggleClass('visible', visible);
         }
+        if (visible)
+          bindPusherClickHandler();
       });
 
       scope.$watch(ctrl.isAnimatingIn, function(animatingIn) {
@@ -47,6 +70,7 @@ angular.module('ui.sidebar').directive('sidebar', function($controller, $animate
 
       scope.$watch(ctrl.isAnimatingOut, function(animatingOut) {
         if (animatingOut) {
+          unbindPusherClickHandler();
           if (animation) $animate.cancel(animation);
           elem.removeClass('in');
 
