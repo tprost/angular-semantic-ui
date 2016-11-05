@@ -50,7 +50,7 @@ gulp.task('docs:demos:nunjucks', function() {
     .pipe(gulp.dest('dist/demos'));
 });
 
-gulp.task('docs:demos', ['docs:demos:nunjucks']);
+gulp.task('docs:demos', ['docs:demos:nunjucks', 'docs:demos:static']);
 
 gulp.task('docs:api', ['docs:api:dgeni', 'docs:api:static']);
   // 'docs:demos:nunjucks']);

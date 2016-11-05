@@ -24,7 +24,7 @@ angular.module('ui.sidebar').directive('sidebar', function($controller, $animate
 
       var pusher = angular.element($document[0].querySelector('.pusher'));
       var pusherClickHandler = function(e) {
-        if (ctrl.isVisible() && !ctrl.isAnimatingIn()) {
+        if (ctrl.isVisible() && !ctrl.isAnimatingIn() && ctrl.settings.closable) {
           e.preventDefault();
           ctrl.hide();
           scope.$apply();
@@ -58,7 +58,9 @@ angular.module('ui.sidebar').directive('sidebar', function($controller, $animate
           if (animation) $animate.cancel(animation);
 
           var pusher = $document[0].querySelector('.pusher');
-          $animate.addClass(pusher, 'dimmed');
+          if (ctrl.settings.dimPage) {
+            $animate.addClass(pusher, 'dimmed');
+          }
 
           animation = $animate.addClass(elem, 'visible animating in').then(function() {
             ctrl.removeAnimating();
