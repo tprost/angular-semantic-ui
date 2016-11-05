@@ -1,6 +1,6 @@
 /**
- * @ngdoc type
- * @name ui.tab.MenuController
+ * @ngdoc controller
+ * @name MenuController
  * @module ui.tab
  * @description
  * Each menu can have a number of tab items. Only one tab item

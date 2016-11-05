@@ -1,6 +1,6 @@
 /**
  * @ngdoc directive
- * @name ui.dimmer.directive:dimmer
+ * @name dimmer
  * @module ui.dimmer
  * @restrict C
  * @description
@@ -82,3 +82,4 @@ angular.module('ui.dimmer').directive('dimmer', function($controller, $animate, 
     }
   };
 });
+

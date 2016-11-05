@@ -29,9 +29,14 @@ gulp.task('docs:demos:static', function() {
     .pipe(gulp.dest('dist/demos'));
 });
 
-gulp.task('docs:demos:dgeni', function() {
+gulp.task('docs:api:static', function() {
+  gulp.src('docs/**/*.!(html)')
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('docs:api:dgeni', function() {
   try {
-    var dgeni = new Dgeni([require('./docs/demos/dgeni-conf')]);
+    var dgeni = new Dgeni([require('./docs/api/dgeni-conf')]);
     return dgeni.generate();
   } catch(x) {
     console.log(x.stack);
@@ -39,17 +44,18 @@ gulp.task('docs:demos:dgeni', function() {
   }
 });
 
-gulp.task('docs:demos:nunjucks', ['docs:demos:dgeni'], function() {
+gulp.task('docs:demos:nunjucks', function() {
   gulp.src('docs/demos/**/!(_)*.html')
     .pipe(nunjucks.compile(demoData()))
     .pipe(gulp.dest('dist/demos'));
 });
 
-gulp.task('docs:demos', [
-  'docs:demos:static',
-  'docs:demos:nunjucks']);
+gulp.task('docs:demos', ['docs:demos:nunjucks']);
 
-gulp.task('docs', ['docs:demos'], function() {
+gulp.task('docs:api', ['docs:api:dgeni', 'docs:api:static']);
+  // 'docs:demos:nunjucks']);
+
+gulp.task('docs', ['docs:demos', 'docs:api'], function() {
 
 });
 

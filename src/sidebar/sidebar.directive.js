@@ -1,6 +1,6 @@
 /**
  * @ngdoc directive
- * @name ui.sidebar.directive:sidebar
+ * @name sidebar
  * @module ui.sidebar
  * @restrict C
  * @description

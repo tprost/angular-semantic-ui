@@ -1,6 +1,6 @@
 /**
- * @ngdoc type
- * @name ui.modal.ModalController
+ * @ngdoc controller
+ * @name ModalController
  * @module ui.modal
  * @description
  * The controller for the `modal` directive.

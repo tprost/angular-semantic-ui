@@ -1,0 +1,5 @@
+.ui.vertical.menu .item>.header:not(.ui) {
+  margin: 0 0 .5em;
+  font-size: 1em;
+  font-weight: 700;
+}

@@ -1,3 +1,9 @@
+/**
+ * @ngdoc directive
+ * @name dimmable
+ * @module ui.dimmer
+ *
+ */
 angular.module('ui.dimmer').directive('dimmable', function($animate) {
   return {
     restrict: 'C',

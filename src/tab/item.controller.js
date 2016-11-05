@@ -1,6 +1,6 @@
 /**
- * @ngdoc type
- * @name ui.tab.ItemController
+ * @ngdoc controller
+ * @name ItemController
  * @module ui.tab
  * @description
  *

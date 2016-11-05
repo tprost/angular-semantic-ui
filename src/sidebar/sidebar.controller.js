@@ -1,8 +1,9 @@
 /**
- * @ngdoc type
- * @name ui.sidebar.SidebarController
+ * @ngdoc controller
+ * @name SidebarController
  * @module ui.sidebar
  * @description
+ * Controller for the `sidebar` directive.
  *
  */
 angular.module('ui.sidebar').controller('SidebarController', function(sidebarSettings) {

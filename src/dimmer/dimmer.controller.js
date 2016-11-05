@@ -1,6 +1,6 @@
 /**
- * @ngdoc type
- * @name ui.dimmer.DimmerController
+ * @ngdoc controller
+ * @name DimmerController
  * @module ui.dimmer
  * @description
  * The controller used in `dimmer` directive. Use it to

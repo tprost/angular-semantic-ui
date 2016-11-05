@@ -1,5 +1,4 @@
 /**
- *
  * @ngdoc module
  * @name ui.sidebar
  * @description

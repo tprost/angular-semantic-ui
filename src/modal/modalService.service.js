@@ -1,8 +1,7 @@
 /**
  * @ngdoc service
  * @name modalService
- *
- *
+ * @module ui.modal
  * @description
  * A service to help create modal windows on the fly.
  */
@@ -38,6 +37,7 @@ angular.module('ui.modal').provider('modalService', function() {
 
         /**
          * @ngdoc type
+         * @module ui.modal
          * @name Modal
          * @description
          * An object representing an on-the-fly modal.

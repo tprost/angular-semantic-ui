@@ -1,9 +1,8 @@
 /**
- * @ngdoc type
- * @name ui.dimmer.DimmableController
+ * @ngdoc controller
+ * @name DimmableController
  * @module ui.dimmer
  * @description
- *
  * The controller used in `dimmable` directive. Use it to
  * control the behaviour of the dimmer inside the dimmable.
  *

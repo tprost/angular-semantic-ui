@@ -1,4 +1,4 @@
-angular.module('ui').directive('item', function() {
+angular.module('ui.tab').directive('item', function() {
 
   var postLink = function(scope, elem, attrs, ctrl) {
 // var menuController = ctrl[1];
