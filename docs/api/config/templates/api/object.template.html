@@ -1,8 +1,7 @@
 {% include "lib/macros.html" %}
-
 {% extends "_base.html" %}
 
-{% block content %}
+{% block content %}  
 
 {% if doc.params or doc.returns or doc.this or doc.kind == 'function' -%}
 <h2 id="usage">Usage</h2>

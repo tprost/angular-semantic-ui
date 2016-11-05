@@ -16,7 +16,7 @@
 
   <body ng-app="demo">
     {% block body %}
-    <nav class="ui sidebar inverted vertical menu visible left push">
+    <nav class="ui sidebar inverted vertical menu visible left overlay">
 
 
       {% for navGroup in doc.nav.api.navGroups %}
@@ -34,11 +34,13 @@
       {% endfor %}
     </nav>
     <div class="pusher">
-      <div class="ui container">
+      {% block main %}
+      <main class="ui container main">
         {% block content %}
         <!-- content -->
         {% endblock %}
-      </div>
+      </main>
+      {% endblock %}
     </div>
     {% endblock %}
 

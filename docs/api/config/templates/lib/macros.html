@@ -1,5 +1,5 @@
 {% macro typeList(types) -%}
-{% for typeName in types %}<a href="" class="{$ typeName | typeClass $}">{$ typeName | escape $}</a>{% endfor %}
+{% for typeName in types %}<div class="ui label {$ typeName | typeClass $}">{$ typeName | escape $}</div>{% endfor %}
 {%- endmacro -%}
 
 {%- macro paramTable(params) %}
@@ -51,10 +51,15 @@
 {% endmacro -%}
 
 {%- macro typeInfo(fn) -%}
-<table class="variables-matrix return-arguments">
-  <tr>
-    <td>{$ typeList(fn.typeList) $}</td>
-    <td>{$ fn.description | marked $}</td>
-  </tr>
-</table>
+<div>
+  <table class="returns">
+    <tr>
+      <td>
+  {$ typeList(fn.typeList) $}
+      </td>
+      <td>
+  {$ fn.description | marked $}</td>
+    </tr>
+  </table>
+</div>
 {%- endmacro -%}

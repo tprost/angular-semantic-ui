@@ -1,5 +1,24 @@
+html {
+  font-size: 16px;
+}
+
+.ui.container.main {
+  width: auto;
+  margin: 0;
+  padding: 5rem;
+  margin-left: 260px !important;
+}
+
 .ui.vertical.menu .item>.header:not(.ui) {
   margin: 0 0 .5em;
   font-size: 1em;
   font-weight: 700;
+}
+
+.ui.container.main {
+  padding: 3rem;
+}
+
+table.returns td {
+  padding-right: 1rem;
 }

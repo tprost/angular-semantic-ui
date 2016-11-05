@@ -2,12 +2,7 @@
   width: 35px;
   margin-right: 1em;
 }
-.ui.container.main {
-  width: auto;
-  margin: 0;
-  padding: 5rem;
-  margin-left: 260px !important;
-}
+
 .example {
   margin: 5rem 0;
 }
