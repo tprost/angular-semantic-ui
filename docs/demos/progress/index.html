@@ -1,0 +1,52 @@
+{% extends 'demos/_base.html' %}
+
+{% block content %}
+<article class="module">
+  <header>
+    <h1 class="ui header">
+      Dimmer
+      <p class="sub header">
+        A dimmer hides distractions to focus attention on particular content.
+      </p>
+    </h1>
+  </header>
+  <div class="ui divider"></div>
+
+  <nav class="ui three item stackable tabs menu">
+    <a class="active item" data-tab="examples">Examples</a>
+    <a class="item" data-tab="usage">Usage</a>
+    <a class="item" data-tab="settings">Settings</a>
+  </nav>
+
+  <section class="ui active tab" data-tab="examples">
+    <article class="example" id="example-dimmer-basic">
+      <h2 class="ui header">Simple Progress Bar</h2>
+      <div class="ui progress">
+        <div class="bar">
+          <div class="progress"></div>
+        </div>
+        <div class="label">Uploading Files</div>
+      </div>
+    </article>
+  </section>
+
+
+  <section class="ui tab" data-tab="usage">
+
+  </section>
+
+  <section class="ui tab" data-tab="settings">
+  </section>
+
+</article>
+
+
+{% endblock %}
+
+
+{% block js %}
+
+{{ super() }}
+<script src="./dimmer.js"></script>
+
+{% endblock %}
