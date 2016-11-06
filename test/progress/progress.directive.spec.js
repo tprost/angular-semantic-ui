@@ -66,4 +66,12 @@ describe('progress directive', function() {
     expect(progress.html()).toContain('33.3%');
   });
 
+  it('should display percentages over 100% as 100%', function() {
+    uiProgress.attr('data-percent', 110);
+    $compile(uiProgress)($rootScope);
+    $rootScope.$digest();
+    expect(bar.attr('style')).toEqual('width: 100%;');
+    expect(progress.html()).toContain('100%');
+  });
+
 });
