@@ -26,3 +26,11 @@ table.returns td {
   width: 35px;
   margin-right: 1em;
 }
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.ui.top.attached.progress + * {
+  margin-top: 1em;
+}

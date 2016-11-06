@@ -20,7 +20,7 @@
 
   <section class="ui active tab" data-tab="examples">
     <article class="example">
-      <h2 class="ui header">Simple Progress Bar</h2>
+      <h3 class="ui header">Standard</h3>
       <div class="ui progress" data-value="6" data-total="22">
         <div class="bar">
           <div class="progress"></div>
@@ -29,12 +29,14 @@
       </div>
     </article>
     <article class="example">
+      <h3 class="ui header">Indicating</h3>
       <div class="ui indicating progress" data-percent="65">
         <div class="bar"></div>
         <div class="label">65% Funded</div>
       </div>
     </article>
     <article class="example">
+      <h3 class="ui header">Attached</h3>
       <div class="ui segment">
         <div class="ui top attached progress" data-percent="20">
           <div class="bar"></div>
@@ -49,7 +51,18 @@
 
 
   <section class="ui tab" data-tab="usage">
-
+    <article class="example">
+      <h3 class="ui header">Adding Value Through Controller</h3>
+      <div class="ui indicating progress" data-value="50" data-total="200" id="example-progress-1">
+        <div class="bar">
+          <div class="progress"></div>
+        </div>
+        <div class="label">Waiting for you to press button</div>
+      </div>
+      <button class="ui button" type="button" id="example-progress-1-button">
+        Click me
+      </button>
+    </article>
   </section>
 
   <section class="ui tab" data-tab="settings">
