@@ -1,7 +1,22 @@
-{% extends '_base.html' %}
-{% block content %}
-<nav>
-  <a href="/demos">Demos</a>
-  <a href="/api">API Documentation</a>
+{% extends 'demos/_base.html' %}
+
+{% block sidebar %}
+<nav class="ui sidebar inverted vertical menu visible left overlay">
+  <div class="item">
+    <a class="ui logo icon image">
+      <img src="http://semantic-ui.com/images/logo.png">
+    </a>
+    <a href="/">
+      <b>angular-semantic-ui</b>
+    </a>
+  </div>
+  <a class="item" href="/api/">API Documentation</a>
+  <a class="item" href="/demos">
+    <b>Demos</b>
+  </a>
 </nav>
+{% endblock %}
+
+{% block content %}
+<p>Welcome to the documentation! These are components written in Angular JS implementing Semantic UI components. There are demos and there's API documentation.</p>
 {% endblock %}

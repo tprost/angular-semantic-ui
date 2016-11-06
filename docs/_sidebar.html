@@ -1,0 +1,16 @@
+<nav class="ui sidebar inverted vertical menu visible left overlay">
+  <div class="item">
+    <a class="ui logo icon image">
+      <img src="http://semantic-ui.com/images/logo.png">
+    </a>
+    <a href="/">
+      <b>angular-semantic-ui</b>
+    </a>
+  </div>
+  <a href="/api/" class="header item">API Documentation</a>
+  {% block sidebar_api %}
+  {% endblock %}
+  <a href="/demos" class="header item">Demos</a>
+  {% block sidebar_demos %}
+  {% endblock %}
+</nav>

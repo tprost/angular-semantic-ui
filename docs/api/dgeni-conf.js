@@ -131,6 +131,9 @@ module.exports = new Package('dgeni-example', [
     //   .unshift(path.resolve(__dirname, '../../docs/ngdoc/templates'));
 
     templateFinder.templateFolders
+      .unshift(path.resolve(__dirname, '..'));
+
+    templateFinder.templateFolders
       .unshift(path.resolve(__dirname, 'config/templates'));
 
     templateFinder.templateFolders

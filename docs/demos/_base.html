@@ -22,30 +22,10 @@
 
   <body ng-app="demo">
     {% block body %}
-    <nav class="ui sidebar inverted vertical menu visible left overlay">
-      <div class="item">
-        <a class="ui logo icon image">
-          <img src="http://semantic-ui.com/images/logo.png">
-        </a>
-        <a href="/demos">
-          <b>UI Demos</b>
-        </a>
-      </div>
-      <a class="item" href="/api/">API Documentation</a>
-      <div class="header item">Demos</div>
-      <a class="item" href="/demos/dimmer/">
-        Dimmer
-      </a>
-      <a class="item" href="/demos/modal/">
-        Modal
-      </a>
-      <a class="item" href="/demos/sidebar/">
-        Sidebar
-      </a>
-      <a class="item" href="/demos/tab/">
-        Tab
-      </a>
-    </nav>
+
+    {% block sidebar %}
+    {% include 'demos/_sidebar.html' %}
+    {% endblock %}
     <div class="pusher">
       <main class="ui container main">
         {% block content %}

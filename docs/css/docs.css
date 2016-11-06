@@ -22,3 +22,7 @@ html {
 table.returns td {
   padding-right: 1rem;
 }
+.ui.logo.icon.image {
+  width: 35px;
+  margin-right: 1em;
+}

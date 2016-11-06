@@ -1,0 +1,16 @@
+{% extends "_sidebar.html" %}
+
+{% block sidebar_api %}
+{% for navGroup in doc.nav.api.navGroups %}
+<div class="item">
+  <div class="header">{$ navGroup.name $}</div>
+  <div class="menu">
+    {% for item in navGroup.navItems %}
+    <a class="item" href="/api/partials/{$ item.href $}.html">
+      {$ item.name $}
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

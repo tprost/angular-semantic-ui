@@ -1,5 +1,6 @@
 const gulp = require('gulp');
-const nunjucks = require('gulp-nunjucks');
+const gulpNunjucks = require('gulp-nunjucks');
+const nunjucks = require('nunjucks');
 const glob = require('glob');
 const fs = require('fs');
 const _ = require('lodash');
@@ -44,16 +45,25 @@ gulp.task('docs:api:dgeni', function() {
   }
 });
 
-gulp.task('docs:demos:nunjucks', function() {
+gulp.task('docs:demos:nunjucks:index', function() {
+  gulp.src('docs/index.html')
+    .pipe(gulpNunjucks.compile(demoData()))
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('docs:demos:nunjucks', ['docs:demos:nunjucks:index'], function() {
+  var env = new nunjucks.Environment(new nunjucks.FileSystemLoader('docs'));
   gulp.src('docs/demos/**/!(_)*.html')
-    .pipe(nunjucks.compile(demoData()))
+    .pipe(gulpNunjucks.compile(demoData(), {
+      env: env
+    }))
     .pipe(gulp.dest('dist/demos'));
 });
 
 gulp.task('docs:demos', ['docs:demos:nunjucks', 'docs:demos:static']);
 
 gulp.task('docs:api', ['docs:api:dgeni', 'docs:api:static']);
-  // 'docs:demos:nunjucks']);
+// 'docs:demos:nunjucks']);
 
 gulp.task('docs', ['docs:demos', 'docs:api'], function() {
 

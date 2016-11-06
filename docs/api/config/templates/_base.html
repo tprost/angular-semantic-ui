@@ -16,23 +16,9 @@
 
   <body ng-app="demo">
     {% block body %}
-    <nav class="ui sidebar inverted vertical menu visible left overlay">
 
+{% include "../../_sidebar.html" %}
 
-      {% for navGroup in doc.nav.api.navGroups %}
-      <div class="item">
-        <div class="header">{$ navGroup.name $}</div>
-        <div class="menu">
-          {% for item in navGroup.navItems %}
-          <a class="item" href="/api/partials/{$ item.href $}.html">
-            {$ item.name $}
-          </a>
-          {% endfor %}
-        </div>
-      </div>
-
-      {% endfor %}
-    </nav>
     <div class="pusher">
       {% block main %}
       <main class="ui container main">
