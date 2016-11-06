@@ -43,12 +43,19 @@ describe('progress directive', function() {
     expect(bar.attr('style')).toEqual('width: 30%;');
   });
 
-  it('sets progress to the percentage', function() {
+  it('sets progress to the percentage if you use total and value', function() {
     uiProgress.attr('data-total', 10);
     uiProgress.attr('data-value', 3);
     $compile(uiProgress)($rootScope);
     $rootScope.$digest();
     expect(progress.html()).toContain('30%');
+  });
+
+  it('sets progress to the percentage if you use percent', function() {
+    uiProgress.attr('data-percent', 77);
+    $compile(uiProgress)($rootScope);
+    $rootScope.$digest();
+    expect(progress.html()).toContain('77%');
   });
 
   it('progress percentage should round to 1 decimal', function() {
