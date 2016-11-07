@@ -63,6 +63,30 @@
         Click me
       </button>
     </article>
+
+    <article class="example" ng-controller="Example2Controller">
+      <h3 class="ui header">Using Scope Value</h3>
+      <div class="ui indicating progress blue" data-value="value" data-total="total" id="example-progress-2">
+        <div class="bar">
+          <div class="progress"></div>
+        </div>
+        <div class="label">Waiting for you to press button</div>
+      </div>
+      <div class="ui form">
+        <div class="fields">
+          <div class="field">
+            <label>Total</label>
+            <input type="text" ng-model="total" value="10">
+          </div>
+          <div class="field">
+            <label>Value</label>
+            <input type="text" ng-model="value" value="5">
+          </div>
+        </div>
+
+      </div>
+    </article>
+
   </section>
 
   <section class="ui tab" data-tab="settings">

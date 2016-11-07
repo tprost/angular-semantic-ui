@@ -11,9 +11,14 @@ angular.module('ui.progress').directive('progress', function($animate) {
     link: function(scope, elem, attrs, ctrl) {
 
       if (elem.hasClass('ui')) {
-        if (attrs.total) {
-          ctrl.setTotal(Number(attrs.total));
-          ctrl.setValue(Number(attrs.value));
+
+        if (attrs.total && attrs.value) {
+          scope.$watch(attrs.value, function(value) {
+            ctrl.setValue(Number(value));
+          });
+          scope.$watch(attrs.total, function(total) {
+            ctrl.setTotal(Number(total));
+          });
         } else if (attrs.percent) {
           ctrl.setPercent(Number(attrs.percent));
         }

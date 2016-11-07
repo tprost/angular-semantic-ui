@@ -74,4 +74,19 @@ describe('progress directive', function() {
     expect(progress.html()).toContain('100%');
   });
 
+  it('should be able to use Angular expressions', function() {
+    $rootScope.total = 10;
+    $rootScope.value = 6;
+    uiProgress.attr('data-value', 'value');
+    uiProgress.attr('data-total', 'total');
+    $compile(uiProgress)($rootScope);
+    $rootScope.$digest();
+    expect(bar.attr('style')).toEqual('width: 60%;');
+    expect(progress.html()).toContain('60%');
+    $rootScope.value = 2;
+    $rootScope.$digest();
+    expect(bar.attr('style')).toEqual('width: 20%;');
+    expect(progress.html()).toContain('20%');
+  });
+
 });

@@ -13,3 +13,9 @@ angular.element(document.querySelector("#example-progress-1-button"))
     progress.scope().$digest();
 
   });
+
+
+angular.module('demo').controller('Example2Controller', function($scope) {
+  $scope.value = 4;
+  $scope.total = 10;
+});

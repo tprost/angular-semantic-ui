@@ -89,7 +89,7 @@ gulp.task('serve', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(['src/**/*.js', 'docs/**/*'], ['docs:demos']);
+  gulp.watch(['src/**/*.js', 'docs/**/*'], ['docs']);
 });
 
 // parses config file
