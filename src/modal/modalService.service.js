@@ -10,7 +10,7 @@ angular.module('ui.modal').provider('modalService', function() {
   var ModalProvider;
   return ModalProvider = {
     defaults: {
-      containerTemplate: "<div class=\"ui standard modal\"></div>",
+      containerTemplate: "<div class=\"ui standard modal\"><i class=\"ui icon close\"></i></div>",
       containerTemplateUrl: null,
       bodyClass: "dimmable dimmed",
       containerClass: null,

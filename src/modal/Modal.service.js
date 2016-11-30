@@ -3,7 +3,7 @@ angular.module('ui.modal').factory('Modal', function($q, $injector, $rootScope, 
   var pendingPromise;
 
   var defaults = {
-    containerTemplate: "<div class=\"ui standard modal\"></div>",
+    containerTemplate: "<div class=\"ui standard modal\"><i class=\"ui icon close\"></i></div>",
     containerTemplateUrl: null,
     bodyClass: "dimmable dimmed",
     containerClass: null,
