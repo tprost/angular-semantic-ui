@@ -95,6 +95,16 @@ angular.module('ui.modal').directive('modal', function($document, $animate, $com
         }
       });
 
+
+      var close = angular.element(elem[0].querySelector('.close'));
+      close.bind('click', function(e) {
+        if (ctrl.settings.closable) {
+          ctrl.close();
+          scope.$digest();
+        }
+      });
+
+
     }
   };
 });
